@@ -6,6 +6,9 @@
   <title>Tüm Projeler — Burçak Design</title>
   <meta name="description" content="Burçak Design tüm projeleri — villa, apartman, ev, ofis, restoran ve otel iç mimarlık ve 3D render projeleri."/>
   <link rel="stylesheet" href="styles.css"/>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <style>
     .gallery-grid {
       columns: 1;
@@ -440,26 +443,30 @@ window.addEventListener('scroll', () => {
 
 // ===== FILTER =====
 const pills = document.querySelectorAll('.pill');
-const items = document.querySelectorAll('.gallery-item');
+let items = document.querySelectorAll('.gallery-item'); // Changed to let so we can update it
+
+// Filter Function
+function applyFilters() {
+  const activePill = document.querySelector('.pill.active');
+  const filter = activePill ? activePill.dataset.filter : 'all';
+
+  items.forEach(item => {
+    const cat = item.dataset.cat;
+    if (filter === 'all' || cat === filter) {
+      item.style.opacity = '1';
+      item.classList.remove('hidden');
+    } else {
+      item.style.opacity = '0';
+      setTimeout(() => { item.classList.add('hidden'); }, 400);
+    }
+  });
+}
 
 pills.forEach(pill => {
   pill.addEventListener('click', function() {
-    const filter = this.dataset.filter;
-
     pills.forEach(p => p.classList.remove('active'));
     this.classList.add('active');
-
-    items.forEach(item => {
-      const cat = item.dataset.cat;
-      if (filter === 'all' || cat === filter) {
-        item.style.opacity = '0';
-        item.classList.remove('hidden');
-        setTimeout(() => { item.style.opacity = '1'; item.style.transition = 'opacity 0.4s'; }, 10);
-      } else {
-        item.style.opacity = '0';
-        setTimeout(() => { item.classList.add('hidden'); }, 400);
-      }
-    });
+    applyFilters();
   });
 });
 
@@ -496,9 +503,13 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 
-items.forEach(item => {
-  item.addEventListener('click', () => openLightbox(item));
-});
+function attachLightboxListeners() {
+  items.forEach(item => {
+    // Sadece bir kez eklemek için eski listener varsa siliyoruz veya yenisini klonluyoruz ama en kolayı inline onclick kullanmak veya listeyi yenilemek.
+    item.onclick = () => openLightbox(item);
+  });
+}
+attachLightboxListeners();
 
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
@@ -517,6 +528,49 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightbox();
   if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
   if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
+});
+
+// ===== FIREBASE ENTEGRASYONU =====
+const firebaseConfig = {
+    apiKey: "AIzaSyAtJHm7YPVoz7PsOhL6_HSyk_SURbi6EN8",
+    authDomain: "burcakdesing.firebaseapp.com",
+    projectId: "burcakdesing",
+    storageBucket: "burcakdesing.firebasestorage.app",
+    messagingSenderId: "977185073577",
+    appId: "1:977185073577:web:39ff7a2ebf0fc366113cb8",
+    measurementId: "G-RX6ZBPW3X1"
+};
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+const db = firebase.firestore();
+const galleryGrid = document.getElementById('galleryGrid');
+
+db.collection('projects').orderBy('createdAt', 'asc').get().then((snapshot) => {
+    snapshot.forEach(doc => {
+        const data = doc.data();
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.dataset.cat = data.category;
+        item.dataset.title = data.title;
+        item.dataset.tag = data.category.charAt(0).toUpperCase() + data.category.slice(1);
+        
+        item.innerHTML = `
+            <img src="${data.imageUrl}" alt="${data.title}">
+            <div class="gallery-overlay">
+                <span class="tag">${item.dataset.tag}</span>
+                <h3>${data.title}</h3>
+            </div>
+        `;
+        
+        // Yeni projeyi en başa ekle
+        galleryGrid.prepend(item);
+    });
+    
+    // Elemanları güncelle ve eventleri bağla
+    items = document.querySelectorAll('.gallery-item');
+    attachLightboxListeners();
+    applyFilters(); // Filtreleri yeni gelenlere uygula
 });
 </script>
 </body>
