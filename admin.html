@@ -313,6 +313,7 @@
             <ul class="nav-menu">
                 <li class="active" onclick="switchTab('portfolio', this)">Portfolyo Yönetimi</li>
                 <li onclick="switchTab('navigation', this)">Navigasyon Yönetimi</li>
+                <li onclick="switchTab('referanslar', this)">Referanslar</li>
                 <li onclick="switchTab('categories', this)">Kategoriler</li>
                 <li onclick="switchTab('settings_home', this)">Ana Sayfa Metinleri</li>
                 <li onclick="switchTab('settings_about', this)">Hakkımda Metinleri</li>
@@ -406,6 +407,34 @@
                 </div>
             </div>
 
+
+            <!-- REFERANSLAR TAB -->
+            <div id="tab-referanslar" class="tab-content">
+                <div class="header">
+                    <h2>Referanslar</h2>
+                    <p>Referans şirket logolarını yönetin.</p>
+                </div>
+                <div class="add-project-form">
+                    <h3 style="margin-top:0;">Yeni Referans Ekle</h3>
+                    <div class="upload-area" id="ref-drop-zone">
+                        <div class="upload-icon">🏢</div>
+                        <p id="ref-upload-text">Logo görselini buraya sürükleyin veya tıklayın</p>
+                        <input type="file" id="ref-file-input" accept="image/*" style="display:none;">
+                        <div id="ref-upload-progress" style="height:4px;background:var(--primary);width:0%;transition:width 0.3s;margin-top:10px;border-radius:2px;"></div>
+                    </div>
+                    <div class="form-group" style="margin-top:15px;">
+                        <label>Şirket / Kurum Adı</label>
+                        <input type="text" id="ref-name" class="form-control" placeholder="Örn: Abacıoğlu İnşaat">
+                    </div>
+                    <button class="btn" id="ref-save-btn" onclick="saveReferans()" disabled style="margin-top:10px;">Önce Logo Yükleyin</button>
+                </div>
+                <div class="add-project-form" style="margin-top:20px;">
+                    <h3 style="margin-top:0;">Mevcut Referanslar</h3>
+                    <div id="ref-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:15px;margin-top:15px;">
+                        <p style="color:#888;">Yükleniyor...</p>
+                    </div>
+                </div>
+            </div>
 
             <!-- SETTINGS HOME TAB -->
             <div id="tab-settings_home" class="tab-content">

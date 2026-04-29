@@ -234,7 +234,8 @@ function loadSettings() {
 
     loadCategories();
     loadNavItems();
-
+    setTimeout(initRefUpload, 100);
+    loadReferanslar();
 }
 
 // Dinamik Site Ayarları Kaydetme
@@ -427,5 +428,96 @@ function deleteNavItem(id) {
     if (!confirm('Bu menü öğesini silmek istediğinize emin misiniz?')) return;
     navItems = navItems.filter(item => item.id !== id);
     db.collection('settings').doc('navigation').set({items: navItems}).then(() => renderNavList());
+}
+
+// ===== REFERANSLAR YÖNETİMİ =====
+let currentRefImageUrl = null;
+
+function initRefUpload() {
+    const dropZone = document.getElementById('ref-drop-zone');
+    const fileInput = document.getElementById('ref-file-input');
+    if (!dropZone || !fileInput) return;
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', e => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        if (e.dataTransfer.files.length > 0) uploadRefImage(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', e => {
+        if (e.target.files.length > 0) uploadRefImage(e.target.files[0]);
+    });
+}
+
+function uploadRefImage(file) {
+    if (!file.type.startsWith('image/')) { alert('Lütfen sadece resim dosyası yükleyin.'); return; }
+    const uploadText = document.getElementById('ref-upload-text');
+    const uploadProgress = document.getElementById('ref-upload-progress');
+    const saveBtn = document.getElementById('ref-save-btn');
+    const fileName = 'referanslar/' + Date.now() + '_' + file.name;
+    const uploadTask = storage.ref(fileName).put(file);
+    uploadTask.on('state_changed',
+        snapshot => {
+            const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploadProgress.style.width = pct + '%';
+            uploadText.textContent = 'Yükleniyor... %' + Math.round(pct);
+        },
+        error => alert('Yükleme hatası: ' + error.message),
+        () => {
+            uploadTask.snapshot.ref.getDownloadURL().then(url => {
+                currentRefImageUrl = url;
+                uploadText.textContent = 'Logo yüklendi! ✅';
+                uploadProgress.style.backgroundColor = '#4caf50';
+                saveBtn.disabled = false;
+                saveBtn.textContent = 'Referans Ekle';
+            });
+        }
+    );
+}
+
+function saveReferans() {
+    if (!currentRefImageUrl) return;
+    const name = document.getElementById('ref-name').value.trim();
+    db.collection('referanslar').add({
+        imageUrl: currentRefImageUrl,
+        name: name,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        currentRefImageUrl = null;
+        document.getElementById('ref-name').value = '';
+        document.getElementById('ref-upload-text').textContent = 'Logo görselini buraya sürükleyin veya tıklayın';
+        document.getElementById('ref-upload-progress').style.width = '0%';
+        document.getElementById('ref-upload-progress').style.backgroundColor = 'var(--primary)';
+        document.getElementById('ref-save-btn').disabled = true;
+        document.getElementById('ref-save-btn').textContent = 'Önce Logo Yükleyin';
+        loadReferanslar();
+    });
+}
+
+function loadReferanslar() {
+    db.collection('referanslar').orderBy('createdAt', 'asc').get().then(snapshot => {
+        const listDiv = document.getElementById('ref-list');
+        if (!listDiv) return;
+        if (snapshot.empty) {
+            listDiv.innerHTML = '<p style="color:#888;grid-column:1/-1;">Henüz referans eklenmedi.</p>';
+            return;
+        }
+        listDiv.innerHTML = '';
+        snapshot.forEach(doc => {
+            const d = doc.data();
+            listDiv.innerHTML += `
+                <div style="background:#1a1a1a;border-radius:8px;overflow:hidden;border:1px solid #333;text-align:center;">
+                    <img src="${d.imageUrl}" style="width:100%;height:120px;object-fit:contain;background:#fff;padding:10px;box-sizing:border-box;">
+                    ${d.name ? `<p style="margin:8px;font-size:13px;color:#ccc;">${d.name}</p>` : ''}
+                    <button onclick="deleteReferans('${doc.id}')" style="background:#cc0000;border:none;color:white;padding:4px 10px;border-radius:3px;cursor:pointer;font-size:11px;margin-bottom:10px;">Sil</button>
+                </div>`;
+        });
+    });
+}
+
+function deleteReferans(id) {
+    if (!confirm('Bu referansı silmek istediğinize emin misiniz?')) return;
+    db.collection('referanslar').doc(id).delete().then(() => loadReferanslar());
 }
 
