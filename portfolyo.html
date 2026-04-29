@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tüm Projeler — Burçak Design</title>
+  <meta name="description" content="Burçak Design tüm projeleri — villa, apartman, ev, ofis, restoran ve otel iç mimarlık ve 3D render projeleri."/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .gallery-grid {
+      columns: 1;
+      gap: 20px;
+    }
+    @media (min-width: 640px) { .gallery-grid { columns: 2; } }
+    @media (min-width: 1024px) { .gallery-grid { columns: 3; } }
+    @media (min-width: 1280px) { .gallery-grid { columns: 4; } }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      border: 0.5px solid rgba(78,70,57,0.2);
+      cursor: pointer;
+      transition: border-color 0.5s ease, box-shadow 0.5s ease;
+    }
+    .gallery-item:hover {
+      border-color: rgba(233,193,118,0.6);
+      box-shadow: 0 0 40px rgba(233,193,118,0.15);
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      filter: brightness(0.85);
+      transition: transform 1s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.8s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.06);
+      filter: brightness(1);
+    }
+    .gallery-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0%;
+      background: var(--primary);
+      z-index: 10;
+      transition: height 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .gallery-item:hover::before { height: 100%; }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.3) 40%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay .tag {
+      color: var(--primary);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      transform: translateY(12px);
+      opacity: 0;
+      transition: transform 0.4s ease 0.05s, opacity 0.4s ease 0.05s;
+    }
+    .gallery-overlay h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(18px,2vw,24px);
+      font-weight: 400;
+      color: var(--on-surface);
+      transform: translateY(12px);
+      opacity: 0;
+      transition: transform 0.4s ease 0.1s, opacity 0.4s ease 0.1s;
+    }
+    .gallery-item:hover .gallery-overlay .tag,
+    .gallery-item:hover .gallery-overlay h3 {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Filter pills */
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+    .pill {
+      padding: 10px 24px;
+      border: 1px solid rgba(78,70,57,0.4);
+      background: transparent;
+      color: var(--on-surface-variant);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .pill:hover { border-color: var(--primary); color: var(--primary); }
+    .pill.active {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(8px);
+    }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox-inner {
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border: 0.5px solid rgba(233,193,118,0.2);
+    }
+    .lightbox-info {
+      padding: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 24px; right: 32px;
+      background: none; border: none;
+      color: var(--primary); font-size: 32px;
+      cursor: pointer; z-index: 510;
+      transition: color 0.3s;
+    }
+    .lightbox-close:hover { color: var(--on-surface); }
+    .lightbox-nav {
+      position: fixed;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(233,193,118,0.1);
+      border: 0.5px solid rgba(233,193,118,0.3);
+      color: var(--primary);
+      font-size: 28px;
+      cursor: pointer;
+      padding: 16px 20px;
+      z-index: 510;
+      transition: all 0.3s;
+    }
+    .lightbox-nav:hover { background: rgba(233,193,118,0.2); }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+
+    /* Hidden items */
+    .gallery-item.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lbPrev">‹</button>
+  <button class="lightbox-nav lightbox-next" id="lbNext">›</button>
+  <div class="lightbox-inner">
+    <img id="lbImg" src="" alt=""/>
+    <div class="lightbox-info">
+      <span id="lbTag" class="font-label-caps" style="color:var(--primary);"></span>
+      <h3 id="lbTitle" class="font-headline-md" style="color:var(--on-surface);"></h3>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="main-header">
+  <div class="header-inner">
+    <button class="header-menu-btn" id="menuOpen" aria-label="Menü">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <a href="index.html" class="header-logo" style="display:flex;align-items:center;gap:12px;">
+      <img src="images/logo-icon.png" alt="Burçak Design Logo" style="height:36px;width:auto;"/>
+      <span>BURÇAK DESIGN</span>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html">Ana Sayfa</a>
+      <a href="hizmetler.html">Hizmetler</a>
+      <a href="portfolyo.html" class="active">Portfolyo</a>
+      <a href="iletisim.html">İletişim</a>
+    </nav>
+    <div style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(233,193,118,0.2);overflow:hidden;">
+      <img src="images/logo-icon.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;"/>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="menuClose">
+    <span class="material-symbols-outlined">close</span>
+  </button>
+  <a href="index.html">Ana Sayfa</a>
+  <a href="hizmetler.html">Hizmetler</a>
+  <a href="portfolyo.html" class="active">Portfolyo</a>
+  <a href="iletisim.html">İletişim</a>
+</div>
+
+<!-- PAGE HEADER -->
+<section style="padding: 160px 0 80px; background: var(--bg); position:relative;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle, rgba(233,193,118,0.06) 0%, transparent 70%);pointer-events:none;"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <span class="font-label-caps" style="color:var(--primary);display:block;margin-bottom:16px;">TÜM PROJELER</span>
+    <h1 class="font-display-xl" style="color:var(--on-surface);margin-bottom:24px;">Seçkin Çalışmalarımız</h1>
+    <p class="font-body-lg" style="color:var(--on-surface-variant);max-width:600px;">3D modelleme, iç mimarlık ve dış cephe projelerinden oluşan kapsamlı portfolyomuz.</p>
+    <!-- Altın şerit -->
+    <div style="width:100%;height:2px;background:linear-gradient(to right, var(--primary), var(--primary-container), transparent);margin-top:48px;"></div>
+  </div>
+</section>
+
+<!-- FILTER + GALLERY -->
+<section style="padding: 0 0 120px; background:var(--bg);">
+  <div class="container">
+
+    <!-- Filter Pills -->
+    <div class="filter-pills" id="filterPills">
+      <button class="pill active" data-filter="all">Tümü</button>
+      <button class="pill" data-filter="villa">Villa</button>
+      <button class="pill" data-filter="apartman">Apartman</button>
+      <button class="pill" data-filter="ev">Ev</button>
+      <button class="pill" data-filter="ofis">Ofis</button>
+      <button class="pill" data-filter="restoran">Restoran</button>
+      <button class="pill" data-filter="otel">Otel</button>
+    </div>
+
+    <!-- Gallery -->
+    <div class="gallery-grid" id="galleryGrid">
+
+      <!-- Dış Cephe (5 items) -->
+      <div class="gallery-item" data-cat="villa" data-title="Obsidian Villa" data-tag="Villa">
+        <img src="images/villa1.png" alt="Obsidian Villa"/>
+        <div class="gallery-overlay"><span class="tag">Villa</span><h3>Obsidian Villa</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="villa" data-title="Noir Residence" data-tag="Villa">
+        <img src="images/villa2.png" alt="Noir Residence"/>
+        <div class="gallery-overlay"><span class="tag">Villa</span><h3>Noir Residence</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="villa" data-title="Shadow House" data-tag="Villa">
+        <img src="images/villa3.png" alt="Shadow House"/>
+        <div class="gallery-overlay"><span class="tag">Villa</span><h3>Shadow House</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="apartman" data-title="Onyx Tower" data-tag="Apartman">
+        <img src="images/apt1.png" alt="Onyx Tower"/>
+        <div class="gallery-overlay"><span class="tag">Apartman</span><h3>Onyx Tower</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="apartman" data-title="Slate Residences" data-tag="Apartman">
+        <img src="images/apt2.png" alt="Slate Residences"/>
+        <div class="gallery-overlay"><span class="tag">Apartman</span><h3>Slate Residences</h3></div>
+      </div>
+
+      <!-- İç Mekan (14 + 11 = 25 items) -->
+      <div class="gallery-item" data-cat="ev" data-title="Obsidian Penthouse" data-tag="Ev">
+        <img src="images/salon1.png" alt="Obsidian Penthouse"/>
+        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Obsidian Penthouse</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ev" data-title="Noir Bedroom Suite" data-tag="Ev">
+        <img src="images/yatak1.png" alt="Noir Bedroom Suite"/>
+        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Noir Bedroom Suite</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ev" data-title="Dark Kitchen" data-tag="Ev">
+        <img src="images/mutfak1.png" alt="Dark Kitchen"/>
+        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Dark Kitchen</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ev" data-title="Spa Bathroom" data-tag="Ev">
+        <img src="images/banyo1.png" alt="Spa Bathroom"/>
+        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Spa Bathroom</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ofis" data-title="Executive Office" data-tag="Ofis">
+        <img src="images/ofis1.png" alt="Executive Office"/>
+        <div class="gallery-overlay"><span class="tag">Ofis</span><h3>Executive Office</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ev" data-title="The Obsidian Kitchen" data-tag="Ev">
+        <img src="images/project1.png" alt="The Obsidian Kitchen"/>
+        <div class="gallery-overlay"><span class="tag">Ev</span><h3>The Obsidian Kitchen</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="otel" data-title="Aura Spa Retreat" data-tag="Otel">
+        <img src="images/project2.png" alt="Aura Spa Retreat"/>
+        <div class="gallery-overlay"><span class="tag">Otel</span><h3>Aura Spa Retreat</h3></div>
+      </div>
+
+      <!-- Yeni eklenecek 16 görsel için hazırlık -->
+      <div class="gallery-item" data-cat="apartman" data-title="Metropolis Highrise" data-tag="Apartman">
+        <img src="images/apt3.png" alt="Metropolis Highrise"/>
+        <div class="gallery-overlay"><span class="tag">Apartman</span><h3>Metropolis Highrise</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="apartman" data-title="Lumina Tower" data-tag="Apartman">
+        <img src="images/apt4.png" alt="Lumina Tower"/>
+        <div class="gallery-overlay"><span class="tag">Apartman</span><h3>Lumina Tower</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ev" data-title="Modern Living Room" data-tag="Ev">
+        <img src="images/ev1.png" alt="Modern Living Room"/>
+        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Modern Living Room</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ev" data-title="Minimalist Dining Area" data-tag="Ev">
+        <img src="images/ev2.png" alt="Minimalist Dining Area"/>
+        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Minimalist Dining Area</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ev" data-title="Luxury Master Bath" data-tag="Ev">
+        <img src="images/ev3.png" alt="Luxury Master Bath"/>
+        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Luxury Master Bath</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ev" data-title="Cozy Reading Nook" data-tag="Ev">
+        <img src="images/ev4.png" alt="Cozy Reading Nook"/>
+        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Cozy Reading Nook</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ev" data-title="Elegant Home Office" data-tag="Ev">
+        <img src="images/ev5.png" alt="Elegant Home Office"/>
+        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Elegant Home Office</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ev" data-title="Zen Bedroom" data-tag="Ev">
+        <img src="images/ev6.png" alt="Zen Bedroom"/>
+        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Zen Bedroom</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ofis" data-title="Creative Studio" data-tag="Ofis">
+        <img src="images/ofis2.png" alt="Creative Studio"/>
+        <div class="gallery-overlay"><span class="tag">Ofis</span><h3>Creative Studio</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ofis" data-title="Corporate Boardroom" data-tag="Ofis">
+        <img src="images/ofis3.png" alt="Corporate Boardroom"/>
+        <div class="gallery-overlay"><span class="tag">Ofis</span><h3>Corporate Boardroom</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="ofis" data-title="Tech Workspace" data-tag="Ofis">
+        <img src="images/ofis4.png" alt="Tech Workspace"/>
+        <div class="gallery-overlay"><span class="tag">Ofis</span><h3>Tech Workspace</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="restoran" data-title="Fine Dining Hall" data-tag="Restoran">
+        <img src="images/restoran2.png" alt="Fine Dining Hall"/>
+        <div class="gallery-overlay"><span class="tag">Restoran</span><h3>Fine Dining Hall</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="restoran" data-title="Cozy Cafe" data-tag="Restoran">
+        <img src="images/restoran3.png" alt="Cozy Cafe"/>
+        <div class="gallery-overlay"><span class="tag">Restoran</span><h3>Cozy Cafe</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="otel" data-title="Grand Lobby" data-tag="Otel">
+        <img src="images/otel2.png" alt="Grand Lobby"/>
+        <div class="gallery-overlay"><span class="tag">Otel</span><h3>Grand Lobby</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="otel" data-title="Luxury Suite" data-tag="Otel">
+        <img src="images/otel3.png" alt="Luxury Suite"/>
+        <div class="gallery-overlay"><span class="tag">Otel</span><h3>Luxury Suite</h3></div>
+      </div>
+      <div class="gallery-item" data-cat="otel" data-title="Rooftop Lounge" data-tag="Otel">
+        <img src="images/otel4.png" alt="Rooftop Lounge"/>
+        <div class="gallery-overlay"><span class="tag">Otel</span><h3>Rooftop Lounge</h3></div>
+      </div>
+
+    </div><!-- /gallery-grid -->
+
+    <!-- Altın şerit alt -->
+    <div style="width:100%;height:2px;background:linear-gradient(to right, transparent, var(--primary), var(--primary-container), var(--primary), transparent);margin-top:64px;"></div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(to right, transparent, var(--primary), transparent);"></div>
+  <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:24px;">
+    <img src="images/logo-icon.png" alt="Burçak Design" style="height:48px;width:auto;"/>
+    <div class="footer-logo" style="font-size:18px;letter-spacing:0.4em;">BURÇAK DESIGN</div>
+    <p class="font-body-md" style="max-width:480px;text-align:center;opacity:0.6;">Lüks iç mimarlık, 3D modelleme ve tasarım çözümleri ile hayallerinizdeki mekanları gerçeğe dönüştürüyoruz.</p>
+    <div style="display:flex;gap:32px;margin-top:16px;">
+      <a href="hizmetler.html" style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--on-surface-variant);transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface-variant)'">Hizmetler</a>
+      <a href="portfolyo.html" style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--primary);">Portfolyo</a>
+      <a href="iletisim.html" style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--on-surface-variant);transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface-variant)'">İletişim</a>
+    </div>
+    <div style="width:48px;height:1px;background:var(--primary);margin:16px 0;opacity:0.4;"></div>
+    <p class="font-body-md" style="font-size:13px;opacity:0.4;">© 2026 Burçak Design. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <a href="index.html">
+    <span class="material-symbols-outlined">home_work</span>
+    <span>Ana Sayfa</span>
+  </a>
+  <a href="hizmetler.html">
+    <span class="material-symbols-outlined">architecture</span>
+    <span>Hizmetler</span>
+  </a>
+  <a href="portfolyo.html" class="active">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">layers</span>
+    <span>Portfolyo</span>
+  </a>
+  <a href="iletisim.html">
+    <span class="material-symbols-outlined">mail</span>
+    <span>İletişim</span>
+  </a>
+</nav>
+
+<script>
+// Mobile menu
+document.getElementById('menuOpen').addEventListener('click', () => {
+  document.getElementById('mobileNav').classList.add('open');
+});
+document.getElementById('menuClose').addEventListener('click', () => {
+  document.getElementById('mobileNav').classList.remove('open');
+});
+
+// Scroll animation
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Header scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('main-header').style.background =
+    window.scrollY > 100 ? 'rgba(10,10,10,0.95)' : 'rgba(10,10,10,0.85)';
+});
+
+// ===== FILTER =====
+const pills = document.querySelectorAll('.pill');
+const items = document.querySelectorAll('.gallery-item');
+
+pills.forEach(pill => {
+  pill.addEventListener('click', function() {
+    const filter = this.dataset.filter;
+
+    pills.forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+
+    items.forEach(item => {
+      const cat = item.dataset.cat;
+      if (filter === 'all' || cat === filter) {
+        item.style.opacity = '0';
+        item.classList.remove('hidden');
+        setTimeout(() => { item.style.opacity = '1'; item.style.transition = 'opacity 0.4s'; }, 10);
+      } else {
+        item.style.opacity = '0';
+        setTimeout(() => { item.classList.add('hidden'); }, 400);
+      }
+    });
+  });
+});
+
+// ===== LIGHTBOX =====
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbTitle = document.getElementById('lbTitle');
+const lbTag = document.getElementById('lbTag');
+
+let currentIndex = 0;
+let visibleItems = [];
+
+function getVisible() {
+  return Array.from(items).filter(i => !i.classList.contains('hidden'));
+}
+
+function openLightbox(item) {
+  visibleItems = getVisible();
+  currentIndex = visibleItems.indexOf(item);
+  showLightboxItem(currentIndex);
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function showLightboxItem(idx) {
+  const item = visibleItems[idx];
+  lbImg.src = item.querySelector('img').src;
+  lbTitle.textContent = item.dataset.title;
+  lbTag.textContent = item.dataset.tag;
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+items.forEach(item => {
+  item.addEventListener('click', () => openLightbox(item));
+});
+
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+document.getElementById('lbPrev').addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+  showLightboxItem(currentIndex);
+});
+document.getElementById('lbNext').addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % visibleItems.length;
+  showLightboxItem(currentIndex);
+});
+
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+  if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
+});
+</script>
+</body>
+</html>

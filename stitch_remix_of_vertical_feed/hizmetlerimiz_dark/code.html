@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hizmetlerimiz - Burçak Design</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&amp;family=Noto+Serif:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#3d392f",
+                        "inverse-surface": "#eae1d4",
+                        "on-secondary-fixed-variant": "#61401b",
+                        "on-surface-variant": "#d0c5af",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#082b72",
+                        "on-primary-fixed": "#241a00",
+                        "on-surface": "#eae1d4",
+                        "on-secondary-fixed": "#2c1600",
+                        "on-primary": "#3c2f00",
+                        "outline-variant": "#4d4635",
+                        "on-primary-fixed-variant": "#574500",
+                        "outline": "#99907c",
+                        "surface-container-lowest": "#110e07",
+                        "inverse-on-surface": "#343027",
+                        "inverse-primary": "#735c00",
+                        "on-secondary": "#472a06",
+                        "tertiary-fixed": "#dbe1ff",
+                        "on-secondary-container": "#dfaf81",
+                        "on-tertiary-container": "#254188",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "secondary-fixed-dim": "#eebd8e",
+                        "secondary": "#eebd8e",
+                        "on-error-container": "#ffdad6",
+                        "background": "#16130b",
+                        "primary": "#f2ca50",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-tertiary-fixed": "#00174b",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "surface-container-low": "#1f1b13",
+                        "surface-tint": "#e9c349",
+                        "surface-container-high": "#2d2a21",
+                        "secondary-container": "#64421d",
+                        "surface-container": "#231f17",
+                        "secondary-fixed": "#ffdcbd",
+                        "on-background": "#eae1d4",
+                        "surface": "#16130b",
+                        "on-error": "#690005",
+                        "tertiary-container": "#97b0ff",
+                        "on-primary-container": "#554300",
+                        "surface-container-highest": "#38342b",
+                        "error-container": "#93000a",
+                        "surface-dim": "#16130b",
+                        "primary-fixed": "#ffe088",
+                        "surface-variant": "#38342b",
+                        "primary-container": "#d4af37",
+                        "tertiary": "#bfcdff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "32px",
+                        "section-gap": "128px",
+                        "margin": "64px",
+                        "container-max": "1440px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Noto Serif"],
+                        "h1": ["Noto Serif"],
+                        "h3": ["Noto Serif"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.2em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "300" }],
+                        "h2": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+                        "h1": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "h3": ["32px", { "lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom Scrollbar for immersive experience */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #110e07; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f2ca50; 
+        }
+
+        /* Subtle Gold Glow Effect */
+        .glow-hover:hover {
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pt-20 pb-safe md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-xl border-b border-[#D4AF37]/15 shadow-[0_20px_50px_rgba(26,18,0,0.6)] flex justify-between items-center px-8 h-20 transition-all">
+<button class="text-yellow-600 dark:text-[#D4AF37] hover:text-[#D4AF37] transition-colors duration-500 opacity-100 hover:opacity-80 active:scale-95">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="text-lg font-light tracking-[0.3em] text-[#D4AF37] dark:text-[#D4AF37] uppercase">
+            BURÇAK DESIGN
+        </div>
+<div class="hidden md:flex gap-8 font-serif tracking-widest uppercase text-sm">
+<a class="text-neutral-500 hover:text-[#D4AF37] transition-colors duration-500" href="#">Home</a>
+<a class="text-[#D4AF37] font-medium hover:text-[#D4AF37] transition-colors duration-500" href="#">Services</a>
+<a class="text-neutral-500 hover:text-[#D4AF37] transition-colors duration-500" href="#">Portfolio</a>
+<a class="text-neutral-500 hover:text-[#D4AF37] transition-colors duration-500" href="#">Contact</a>
+</div>
+<button class="text-yellow-600 dark:text-[#D4AF37] hover:text-[#D4AF37] transition-colors duration-500 opacity-100 hover:opacity-80 active:scale-95">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-[1440px] mx-auto px-gutter py-section-gap">
+<!-- Page Header -->
+<div class="mb-section-gap grid grid-cols-12 gap-gutter">
+<div class="col-span-12 md:col-span-8 md:col-start-3 text-center">
+<h1 class="font-h1 text-h1 text-on-surface mb-6">Hizmetlerimiz</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    Bespoke spatial solutions crafted with meticulous attention to detail, materiality, and light. We elevate environments into private sanctuaries.
+                </p>
+</div>
+</div>
+<!-- Services List (Asymmetric Layout) -->
+<div class="flex flex-col gap-[160px]">
+<!-- Service 1: Architectural Design -->
+<article class="grid grid-cols-12 gap-gutter items-center">
+<div class="col-span-12 md:col-span-7 group relative overflow-hidden">
+<div class="absolute inset-0 border border-primary-container/15 group-hover:border-primary-container/40 transition-colors duration-700 z-10 pointer-events-none"></div>
+<img alt="Architectural Design" class="w-full aspect-[4/3] object-cover filter brightness-[0.8] contrast-125 group-hover:scale-105 group-hover:brightness-100 transition-all duration-[1500ms] ease-out" data-alt="Modern architectural exterior at dusk, sharp angles, warm interior lighting glowing through large glass panels, dark moody sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXskD9V-1QQ630xu33AgZqRDnrcHjKD9uB3-U4LZnksRgaR0jr39fsc79EdsipUhYjsaVuu2IDBzgKFgIbDdIioucepy2X669Ka6Qyzu4cj3BwXuidT7MR24paT6SMAF8tQQEKeKij-WCxV22naP-1KwAatNXY048GrnDuvvf-fUkjgr18OkDMYX6Yt0l4pWbmlAxb8cOzrzN3V-Cj95QQOpqEmwkDcu_PDeOnPqsYvPbOvL2yp6ppsnMAZS_PlOn-2ZoANBc_lsNY"/>
+</div>
+<div class="col-span-12 md:col-span-4 md:col-start-9 flex flex-col justify-center mt-8 md:mt-0">
+<span class="font-label-caps text-label-caps text-primary-container mb-4">01 // STRUCTURAL</span>
+<h2 class="font-h2 text-h2 text-on-surface mb-6">Architectural Design</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                        From conception to execution, we shape structures that harmonize with their surroundings while commanding a distinct presence. Our approach blends brutalist monumentalism with refined luxury.
+                    </p>
+<a class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface hover:text-primary-container transition-colors group" href="#">
+                        EXPLORE DISCIPLINE
+                        <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Service 2: Interior Design -->
+<article class="grid grid-cols-12 gap-gutter items-center">
+<div class="col-span-12 md:col-span-4 md:col-start-1 flex flex-col justify-center order-2 md:order-1 mt-8 md:mt-0">
+<span class="font-label-caps text-label-caps text-primary-container mb-4">02 // ATMOSPHERIC</span>
+<h2 class="font-h2 text-h2 text-on-surface mb-6">Interior Design</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                        Curating spaces that evoke emotion. We layer rich textures, deep tones, and cinematic lighting to create intimate, prestige environments tailored for the ultra-high-net-worth individual.
+                    </p>
+<a class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface hover:text-primary-container transition-colors group" href="#">
+                        EXPLORE DISCIPLINE
+                        <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="col-span-12 md:col-span-7 md:col-start-6 group relative overflow-hidden order-1 md:order-2">
+<div class="absolute inset-0 border border-primary-container/15 group-hover:border-primary-container/40 transition-colors duration-700 z-10 pointer-events-none"></div>
+<img alt="Interior Design" class="w-full aspect-[4/3] object-cover filter brightness-[0.8] contrast-125 group-hover:scale-105 group-hover:brightness-100 transition-all duration-[1500ms] ease-out" data-alt="Luxurious moody interior, dark charcoal walls, brushed brass accents, low cinematic lighting, minimalist high-end furniture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO0cLVcaHvxmInHEleLpTECsybNdzAbR36KdaQeE88OgXS3-KOlYwxzUlsHPoVD0o_39rLA7dNWAiUR8YxL-OW_SJ9tKxdJ9L5I1-Yg2QZJTCz1tGdLEXHMMZztaZAm9G5XMfKFkpjm7RQHgFTCIx2Z_FOwO7POEsD8iIoJ7XgTnw0qgDal1qW2Fldnj1jU0EbVXdtMIbGh0tZEuuczT5fep4aiPTacgY4PPBq98zg9CTk_ufXYeNIqarFSqf9J347q1ddHtWB3ys0"/>
+</div>
+</article>
+<!-- Service 3: Renovation (Tadilat) -->
+<article class="grid grid-cols-12 gap-gutter items-center">
+<div class="col-span-12 md:col-span-7 group relative overflow-hidden">
+<div class="absolute inset-0 border border-primary-container/15 group-hover:border-primary-container/40 transition-colors duration-700 z-10 pointer-events-none"></div>
+<img alt="Renovation (Tadilat)" class="w-full aspect-[4/3] object-cover filter brightness-[0.8] contrast-125 group-hover:scale-105 group-hover:brightness-100 transition-all duration-[1500ms] ease-out" data-alt="Architectural details of a historic building being modernized, juxtaposition of raw concrete and polished marble, dramatic side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpylFx8DeamCi8RL4Xy0goaVnWAO_goGzVD1cbo0QrP5BQOPK77vixwT7dyS9hZNIdEHzB6jwJA1NjYY1eEC3VgGmR_qS-QmSk9qwIHQHYZzoG5FBrhNFwcpfgArY_m-ijjdP6FzCQTYFM3TdNzVIBggzV5RGtQ3z5dHxoxnZ78gT7-D7H8N_i1gQVzWWNEqbBKNtvFS8pjWtxGWmtAlnuYOAy9B0Arwf7fV2og1YM1ERhv3h-M_602RbF5gwdFNxHqRybj2ZTyMk-"/>
+</div>
+<div class="col-span-12 md:col-span-4 md:col-start-9 flex flex-col justify-center mt-8 md:mt-0">
+<span class="font-label-caps text-label-caps text-primary-container mb-4">03 // TRANSFORMATION</span>
+<h2 class="font-h2 text-h2 text-on-surface mb-6">Renovation (Tadilat)</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                        Breathing new life into existing structures. We honor the bones of a building while completely reimagining its spirit, elevating outdated spaces into contemporary masterworks.
+                    </p>
+<a class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface hover:text-primary-container transition-colors group" href="#">
+                        EXPLORE DISCIPLINE
+                        <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Service 4: Project Management -->
+<article class="grid grid-cols-12 gap-gutter items-center">
+<div class="col-span-12 md:col-span-4 md:col-start-1 flex flex-col justify-center order-2 md:order-1 mt-8 md:mt-0">
+<span class="font-label-caps text-label-caps text-primary-container mb-4">04 // EXECUTION</span>
+<h2 class="font-h2 text-h2 text-on-surface mb-6">Project Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                        Flawless realization of complex visions. Our rigorous oversight ensures that the uncompromising standards of our atelier are maintained across every phase of construction and installation.
+                    </p>
+<a class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface hover:text-primary-container transition-colors group" href="#">
+                        EXPLORE DISCIPLINE
+                        <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="col-span-12 md:col-span-7 md:col-start-6 group relative overflow-hidden order-1 md:order-2">
+<div class="absolute inset-0 border border-primary-container/15 group-hover:border-primary-container/40 transition-colors duration-700 z-10 pointer-events-none"></div>
+<img alt="Project Management" class="w-full aspect-[4/3] object-cover filter brightness-[0.8] contrast-125 group-hover:scale-105 group-hover:brightness-100 transition-all duration-[1500ms] ease-out" data-alt="Architectural blueprints unrolled on a dark obsidian table, brass drafting tools, shallow depth of field, moody sophisticated atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmvRzkkWIiXhmmFvN40KSpA-BYtQGkkvPPI59VBvypnDoDcbP340hQWSweK87OXKZ8rvlupiwkuuihPmCz6YdAEbFmAeID-K-BeT2wRaBf8ALJsR2ECHa8CpOB0q9JTmQ1o_26mu67DfHAfTrG8HezFisHn7MrHaQOBN19Zu785_VvQtQAasEcQyxvXOF2ieE0NLO3kPM5l3TUby3ujv35wiHxch6On9KU7LMyOF76L75V-50UIh1fyTvoi-mQlpR8DbZvCUKzI8M9"/>
+</div>
+</article>
+</div>
+<!-- CTA Section -->
+<div class="mt-section-gap pt-margin border-t border-primary-container/15 text-center">
+<h3 class="font-h3 text-h3 text-on-surface mb-8">Discuss a Potential Project</h3>
+<button class="bg-primary-container text-black font-label-caps text-label-caps px-8 py-4 uppercase tracking-widest hover:bg-primary transition-colors">
+                Contact the Atelier
+            </button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-black/95 backdrop-blur-2xl border-t border-[#D4AF37]/20 shadow-[0_-10px_40px_rgba(0,0,0,0.8)] flex justify-around items-center h-20 px-6 pb-safe">
+<a class="flex flex-col items-center justify-center text-neutral-600 hover:text-[#D4AF37]/80 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-serif text-[10px] tracking-wider uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#D4AF37] scale-110 transition-transform duration-300 hover:text-[#D4AF37]/80" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="architecture">architecture</span>
+<span class="font-serif text-[10px] tracking-wider uppercase">Services</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-600 hover:text-[#D4AF37]/80 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="photo_library">photo_library</span>
+<span class="font-serif text-[10px] tracking-wider uppercase">Portfolio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-600 hover:text-[#D4AF37]/80 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="mail">mail</span>
+<span class="font-serif text-[10px] tracking-wider uppercase">Contact</span>
+</a>
+</nav>
+</body></html>

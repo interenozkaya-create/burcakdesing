@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Burçak Design - Services</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&amp;family=Noto+Serif:wght@300;400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#1b1c1c",
+                    "surface-tint": "#e9c176",
+                    "surface-container-high": "#292a2a",
+                    "primary-fixed-dim": "#e9c176",
+                    "on-tertiary-fixed": "#1b1b1c",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "background": "#121414",
+                    "primary": "#e9c176",
+                    "secondary-fixed-dim": "#c9c6c5",
+                    "secondary": "#c9c6c5",
+                    "on-error-container": "#ffdad6",
+                    "primary-container": "#c5a059",
+                    "tertiary": "#c8c6c5",
+                    "error-container": "#93000a",
+                    "surface-container-highest": "#343535",
+                    "surface-variant": "#343535",
+                    "primary-fixed": "#ffdea5",
+                    "surface-dim": "#121414",
+                    "surface": "#121414",
+                    "on-error": "#690005",
+                    "tertiary-container": "#a7a5a5",
+                    "on-primary-container": "#4e3700",
+                    "surface-container": "#1f2020",
+                    "secondary-container": "#4a4949",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-background": "#e3e2e2",
+                    "on-primary": "#412d00",
+                    "outline-variant": "#4e4639",
+                    "on-primary-fixed-variant": "#5d4201",
+                    "on-primary-fixed": "#261900",
+                    "on-surface": "#e3e2e2",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-bright": "#383939",
+                    "inverse-surface": "#e3e2e2",
+                    "on-secondary-fixed-variant": "#474646",
+                    "on-surface-variant": "#d1c5b4",
+                    "on-tertiary": "#303030",
+                    "error": "#ffb4ab",
+                    "on-tertiary-fixed-variant": "#474746",
+                    "on-tertiary-container": "#3b3b3b",
+                    "on-secondary": "#313030",
+                    "inverse-primary": "#775a19",
+                    "inverse-on-surface": "#2f3031",
+                    "on-secondary-container": "#bab8b7",
+                    "tertiary-fixed": "#e5e2e1",
+                    "outline": "#9a8f80",
+                    "surface-container-lowest": "#0d0e0f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "gutter": "32px",
+                    "margin-desktop": "80px",
+                    "container-max": "1440px",
+                    "section-padding": "160px"
+            },
+            "fontFamily": {
+                    "label-caps": [
+                            "manrope"
+                    ],
+                    "headline-lg": [
+                            "notoSerif"
+                    ],
+                    "headline-md": [
+                            "notoSerif"
+                    ],
+                    "body-lg": [
+                            "manrope"
+                    ],
+                    "display-xl": [
+                            "notoSerif"
+                    ],
+                    "body-md": [
+                            "manrope"
+                    ]
+            },
+            "fontSize": {
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.2em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "letterSpacing": "0.03em",
+                                    "fontWeight": "300"
+                            }
+                    ],
+                    "display-xl": [
+                            "80px",
+                            {
+                                    "lineHeight": "90px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "300"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom utilities for strict adherence to style guidance not covered purely by Tailwind classes */
+        .glass-gradient {
+            background: radial-gradient(circle at center, rgba(197, 160, 89, 0.08) 0%, transparent 70%);
+        }
+        .text-shadow-moody {
+            text-shadow: 0 4px 24px rgba(0,0,0,0.8);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar from JSON -->
+<header class="fixed w-full z-50 bg-neutral-950/80 backdrop-blur-2xl text-yellow-600 font-serif tracking-widest uppercase flex justify-between items-center px-8 py-4 docked top-0 rounded-none border-b-[0.5px] border-yellow-900/30 flat no-shadows transition-opacity hover:opacity-80">
+<button class="flex items-center justify-center p-2 hover:text-yellow-400 transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<div class="text-lg font-light tracking-[0.3em] text-yellow-600 text-center flex-1">
+            BURÇAK DESIGN
+        </div>
+<button class="flex items-center justify-center p-2 hover:text-yellow-400 transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">account_circle</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="pt-[120px] pb-section-padding px-4 md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Page Header -->
+<section class="mb-24 md:mb-32 flex flex-col items-center md:items-start text-center md:text-left relative">
+<div class="absolute -top-32 -left-32 w-96 h-96 glass-gradient pointer-events-none rounded-full blur-3xl"></div>
+<span class="font-label-caps text-label-caps text-primary mb-6 block uppercase">Our Expertise</span>
+<h1 class="font-display-xl text-display-xl text-on-surface max-w-3xl">Curated <br/><span class="text-surface-variant italic">Disciplines</span></h1>
+<div class="w-24 h-[1px] bg-primary mt-12 mb-8"></div>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Crafting atmospheric spaces that balance tactile materiality with moody luxury. Each discipline represents a dedicated pursuit of architectural refinement.</p>
+</section>
+<!-- Gallery Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Item 1: Konut Tasarımı (Large Span) -->
+<article class="md:col-span-8 group relative overflow-hidden h-[500px] md:h-[700px] bg-surface-container-low cursor-pointer border-[0.5px] border-outline-variant/30 flex flex-col justify-end p-8">
+<img alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80" data-alt="Moody, high-end residential living room at dusk with dark marble walls, warm recessed gold lighting, and minimalist charcoal furniture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFEUO954a3gA2KIKE8KEn1zv1ZNJ6ImLtPrG1KqdXdCAFCRMIfJnr819cseahrR8NvfHfxsnx_Ey7kPt7WmmCwDxJ-M5s5CiPnvuyS04C-ZXcXh2zKZWU52L4H4wwYDwrpAEcaoGa0k988cV8ieE3we3wyAU8n4CyEZ0qYjBfbGJe61fMU4PKWyrYVJfRyFGn7MJeo_t0eBE4Dqh1RyVu2u1BmCA3YVvTWl8X4lDliUXwEwB30WCXdxU2bW7oJCWul3F11Qby028GQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="relative z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest block mb-4 flex items-center gap-3">
+<span class="w-6 h-[1px] bg-primary"></span> 01
+                    </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 text-shadow-moody">Konut Tasarımı</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 line-clamp-2">
+                        Bespoke residential interiors that prioritize discretion and elevated comfort, utilizing smoked oak and Nero Marquina accents.
+                    </p>
+</div>
+</article>
+<!-- Item 2: Ofis ve Ticari Alanlar (Standard Portrait) -->
+<article class="md:col-span-4 group relative overflow-hidden h-[500px] md:h-[700px] bg-surface-container border-[0.5px] border-outline-variant/30 flex flex-col justify-end p-8">
+<img alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-70" data-alt="Dark, sophisticated corporate office corridor with sleek concrete walls, subtle strip lighting, and glass partitions in atmospheric shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ1gCWny9oUzvqF6ED6HWCdYtfKHoxns44SOsCNeiAzIxI9FHdb3BuyOLzMore_QHMIfdL6zjXBZpWK157S-OUlZakOinQQ4A3XNmDKSfpA96LVav1lMqfMBH_IDQ9-md4ukoUSVTmiCubRGtJEHaaXoFeA5_zQeecqKZG1-wQeHRnQqdt3A4tAZvYRTecFGCZPuq2ocyk7hk3MQc3BNoxUrxBceh2pzgcOLa5ucbhKq3nERgf24c9HcbYuqF0bPsAhjhUiA1-yw_-"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+<div class="relative z-10">
+<span class="font-label-caps text-label-caps text-primary uppercase block mb-3">02</span>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-3">Ofis ve Ticari Alanlar</h2>
+<div class="w-full h-[0.5px] bg-outline-variant/50 my-4 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+                        Authoritative commercial environments designed to project stability and forward-thinking luxury through rigorous symmetry and muted palettes.
+                    </p>
+</div>
+</article>
+<!-- Full Width Divider -->
+<div class="md:col-span-12 w-full h-[0.5px] bg-outline-variant/30 my-8"></div>
+<!-- Item 3: Villa Projeleri (Horizontal Split) -->
+<article class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 group border-[0.5px] border-outline-variant/30 bg-surface-container-lowest overflow-hidden">
+<div class="h-[400px] md:h-[600px] relative overflow-hidden">
+<img alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80" data-alt="Exterior view of a modern luxury villa at night, illuminated by warm architectural uplighting against dark dramatic skies and infinity pool" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4rlfrKxMIIX4QCOmVIvUZqUczZmF3QE0W_NS0hQiFY5R3j0FEBpBIyL6Yn8bGDfK7jdpdFL7V17RgUFUEz7ToOgK0Pr3gBliehQvgwMOj2tU8CV6UmY2XzqfXh9PFC7vk8BuPWaWt29VUz_T38lAj14E8Q4mdNH2tTBdcgx-XGC5XCAacttrj_xyFMmg0SsMPakHgySz_gHrf6TyhgO1OTmv3LDFLuIBwGApn6w3aovHIsWsShAv7sY9BlUKbVwR6cojNAvNNjCvA"/>
+<div class="absolute inset-0 bg-black/30"></div>
+</div>
+<div class="p-12 md:p-20 flex flex-col justify-center relative">
+<div class="absolute top-0 left-0 w-full h-full glass-gradient pointer-events-none opacity-50"></div>
+<span class="font-label-caps text-label-caps text-primary uppercase block mb-6">03 — Exclusive Frameworks</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8">Villa Projeleri</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-lg">
+                        Holistic architectural interventions for standalone estates. We merge monumental facades with deeply intimate, gallery-inspired interiors that interact with natural shadows.
+                    </p>
+<a class="inline-flex items-center font-label-caps text-label-caps text-on-surface uppercase group-hover:text-primary transition-colors w-max" href="#">
+                        Explore Methodology
+                        <span class="material-symbols-outlined ml-2 text-sm transition-transform group-hover:translate-x-2">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Item 4: Kafe & Restoran -->
+<article class="md:col-span-4 mt-8 md:mt-16 group relative overflow-hidden h-[450px] bg-surface-container-high border-[0.5px] border-outline-variant/30 flex flex-col justify-between p-8">
+<img alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-50 mix-blend-luminosity group-hover:mix-blend-normal" data-alt="Dimly lit upscale restaurant interior focusing on dark leather booths, brushed brass fixtures, and cinematic spotlighting on tables" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1pd8ZXKvldh1zwrE9R9pUbJdRNcEaUM3-pkiYZliOhmTikwEzOlQ6sr0Q4gtNr7axQSe3356hQNtia878yjm8ube3x8xREwuRFzaEb_2orVSvOC1NgbODhYm-sw-BV25hLbA7xj_4jChd0CNNCyy0dPOPiZTjrxSxmeq3EbYRfLgJcSmMeXNFevj_U7wPnc49eUWuwx_at13IQqq9u6xAh1DnHmejH9D5gY6aA_hyCodeRK2twkDBqgQyszumVQKW4XOvFvpM4LwT"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent"></div>
+<div class="relative z-10 flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-primary uppercase">04</span>
+<span class="material-symbols-outlined text-primary font-light">restaurant</span>
+</div>
+<div class="relative z-10">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Kafe &amp; Restoran</h2>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        Immersive hospitality spaces designed around the psychology of darkspace to elevate the dining ritual.
+                    </p>
+</div>
+</article>
+<!-- Item 5: Klinik Tasarımı -->
+<article class="md:col-span-4 mt-8 md:mt-32 group relative overflow-hidden h-[450px] bg-surface-container border-[0.5px] border-outline-variant/30 flex flex-col justify-between p-8">
+<img alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-40 grayscale group-hover:grayscale-0" data-alt="Minimalist, serene high-end medical clinic reception with warm textured walls, soft indirect cove lighting, and structured stone desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnTZcDGfTzzR-ItdwS9hkwoZUjAPwkyh50rdWcuW3mTJTQ9k0xAQ81nTyrTMqUpHOTz6BbScPImlXpFHcw69dVIG56DQ4AA-7cMmcrnQ3FQgyF4Ioo--84pPa5qqWknMpXMlzaCQVgVmfi6gsKMa8JH3S1bLQGTJWglHDM02ZdjKBHgy6_iWyX1cOnZqxf-nQpTHhqUnK-88FyM4Eh9cy22ZRty_RgeUavIpmKVC9m2NYLBstdQIDmw2YH4Humjm7HNVszFJ0dBWut"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-background/20"></div>
+<div class="relative z-10 flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-primary uppercase">05</span>
+<span class="material-symbols-outlined text-primary font-light">health_and_safety</span>
+</div>
+<div class="relative z-10">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Klinik Tasarımı</h2>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        Redefining clinical environments through tactile modernism, ensuring absolute discretion and soothing atmospheres.
+                    </p>
+</div>
+</article>
+<!-- Item 6: Anahtar Teslim Tadilat -->
+<article class="md:col-span-4 mt-8 md:mt-16 group relative overflow-hidden h-[450px] bg-surface-container-low border-[0.5px] border-outline-variant/30 flex flex-col justify-between p-8">
+<img alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-60" data-alt="Close up of architectural blueprints on a dark textured desk illuminated by a single warm desk lamp creating sharp shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT33-9fnKDZr5NZULolm4hPmq3e5qYd0kfB0luzUpP4825CcbltlpNXGpajFj54_qpbTc_0TFnjmU0tX8YmDaIUIwQwo0dgUX6gR1kNet4pwYDNaK0voFtwC7vucyA3BlInFpgN-GDaZjjl1ig1Ki6RW-lVlYysf08jDHhEvW6EyZVtFh8tBh_uLyGF80l0qJ1rhY5oDEP0iJyQ8NasLmJOoB_N6i6HBVCuoJ_mco2ZgQrF8hl1rHRGALG4NyqP1wlyXCk_WePgIl2"/>
+<div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-500"></div>
+<div class="relative z-10 flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-primary uppercase">06</span>
+<span class="material-symbols-outlined text-primary font-light">handyman</span>
+</div>
+<div class="relative z-10">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Anahtar Teslim Tadilat</h2>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        End-to-end execution of rigorous renovations, managing every detail from raw material sourcing to final brass installation.
+                    </p>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar from JSON (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-neutral-950/90 backdrop-blur-3xl font-sans text-[10px] uppercase tracking-[0.15em] rounded-none border-t-[0.5px] border-yellow-900/30 flat no-shadows flex justify-around items-center px-4 pb-6 pt-2">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-neutral-600 pt-2 hover:bg-neutral-900/50 hover:text-yellow-400 transition-colors duration-300 w-full" href="#">
+<span class="material-symbols-outlined mb-1">home_work</span>
+<span>Home</span>
+</a>
+<!-- Services (Active based on Intent) -->
+<a class="flex flex-col items-center justify-center text-yellow-500 font-bold border-t-2 border-yellow-600 pt-2 scale-95 transition-transform hover:bg-neutral-900/50 hover:text-yellow-400 w-full opacity-80" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">architecture</span>
+<span>Services</span>
+</a>
+<!-- Portfolio (Inactive) -->
+<a class="flex flex-col items-center justify-center text-neutral-600 pt-2 hover:bg-neutral-900/50 hover:text-yellow-400 transition-colors duration-300 w-full" href="#">
+<span class="material-symbols-outlined mb-1">layers</span>
+<span>Portfolio</span>
+</a>
+<!-- Contact (Inactive) -->
+<a class="flex flex-col items-center justify-center text-neutral-600 pt-2 hover:bg-neutral-900/50 hover:text-yellow-400 transition-colors duration-300 w-full" href="#">
+<span class="material-symbols-outlined mb-1">mail</span>
+<span>Contact</span>
+</a>
+</nav>
+</body></html>

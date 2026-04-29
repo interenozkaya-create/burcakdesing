@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hizmetler — Burçak Design</title>
+  <meta name="description" content="Tasarım, 3D görselleştirme ve uygulama. Projenin başından sonuna kadar bütüncül bir hizmet sunuyoruz."/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="main-header">
+  <div class="header-inner">
+    <button class="header-menu-btn" id="menuOpen" aria-label="Menü">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <a href="index.html" class="header-logo" style="display:flex;align-items:center;gap:12px;">
+      <img src="images/logo-icon.png" alt="Burçak Design Logo" style="height:36px;width:auto;"/>
+      <span>BURÇAK DESIGN</span>
+    </a>
+    <nav class="header-nav" id="desktopNav">
+      <a href="index.html">Ana Sayfa</a>
+      <a href="index.html#hakkimda">Hakkımda</a>
+      <a href="hizmetler.html" class="active">Hizmetler</a>
+      <a href="portfolyo.html">Portfolyo</a>
+      <a href="iletisim.html">İletişim</a>
+    </nav>
+    <div style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(212,168,83,0.2);overflow:hidden;">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuALwmopEJjI3pINiTbzpIbyGh2JZI6rVbJj36-XtOb77H0aSrXG6aCRj7QoA-OpLR5UrDUt183aUWruBNtgy9yRxbVqoK681R8HrcAN5VK6X0VE2ufY7Afyy2nFC8Y0Np_ZC9rFQnhqsJu-JeMWDAmTKD4bhfc2ci5uE5z6f0IybssRO56ahSHHTVVJx4OrzNpv6Q61HlmaIH0cQI3XknobFO_vC9M_mYOrSesrF7yRAiQN9-UCFtML_VUU4Jcd4jcsVMlElOI572jR" alt="Avatar" style="width:100%;height:100%;object-fit:cover;"/>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MOBILE NAV ===== -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="menuClose">
+    <span class="material-symbols-outlined">close</span>
+  </button>
+  <a href="index.html">Ana Sayfa</a>
+  <a href="index.html#hakkimda">Hakkımda</a>
+  <a href="hizmetler.html" class="active">Hizmetler</a>
+  <a href="portfolyo.html">Portfolyo</a>
+  <a href="iletisim.html">İletişim</a>
+</div>
+
+<!-- ===== PAGE HERO ===== -->
+<section style="padding:180px 24px 80px; text-align:center; background:var(--surface-container-lowest); position:relative; overflow:hidden;">
+  <!-- Decorative Background Glow -->
+  <div style="position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(ellipse, rgba(212,168,83,0.06) 0%, transparent 70%);pointer-events:none;"></div>
+  
+  <div class="container fade-in">
+    <span class="font-label-caps" style="color:var(--primary);margin-bottom:16px;display:block;letter-spacing:0.4em;">BÜTÜNCÜL YAKLAŞIM</span>
+    <h1 class="font-display-xl" style="text-shadow: 0 2px 40px rgba(212,168,83,0.15);">Hizmetlerimiz</h1>
+    <p class="font-body-lg" style="color:var(--on-surface-variant);max-width:600px;margin:24px auto 0;">Hayallerinizi gerçeğe dönüştürürken, projenin başından sonuna kadar profesyonel bir ekiple yanınızdayız.</p>
+  </div>
+</section>
+
+<!-- ===== SERVICES DETAILS ===== -->
+<section class="section-padding" style="background:var(--bg);">
+  <div class="container">
+    <div class="process-steps"> <!-- Utilizing the existing flex column with gap -->
+      
+      <!-- Tasarım -->
+      <div class="service-detail fade-in">
+        <div class="service-detail-img">
+          <img src="images/ofis1.png" alt="Tasarım"/>
+        </div>
+        <div class="service-detail-content">
+          <span class="font-label-caps tag" style="color:var(--primary);letter-spacing:0.3em;">ADIM 01</span>
+          <h2 class="font-headline-lg" style="margin-bottom:24px;">Tasarım</h2>
+          <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;">
+            Her proje, müşteriyle birlikte geliştirilen bir konseptle başlar. İhtiyaç analizi ve fikir geliştirme aşamasından teknik çizimlere, malzeme seçiminden ürün tedarikine kadar tasarım sürecinin tüm adımlarını eksiksiz yürütüyoruz. 
+          </p>
+          <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;margin-top:16px;">
+            Hayalinizi net bir projeye dönüştürüyor; inşaat sürecine hazır, uygulanabilir bir tasarım dosyası teslim ediyoruz.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3D Görselleştirme -->
+      <div class="service-detail reverse fade-in">
+        <div class="service-detail-img">
+          <img src="images/villa1.png" alt="3D Görselleştirme"/>
+        </div>
+        <div class="service-detail-content">
+          <span class="font-label-caps tag" style="color:var(--primary);letter-spacing:0.3em;">ADIM 02</span>
+          <h2 class="font-headline-lg" style="margin-bottom:24px;">3D Görselleştirme</h2>
+          <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;">
+            Projenizi inşaat başlamadan önce gerçekçi görseller aracılığıyla deneyimlemenizi sağlıyoruz. İç mekân ve dış cephe görselleştirmesinin yanı sıra 360° sanal tur ve animasyon hizmetleriyle mekânınızı tüm detaylarıyla hissedebilirsiniz.
+          </p>
+          <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;margin-top:16px;">
+            Bu süreç, tasarım kararlarını netleştirerek onay süreçlerini çok daha kolay yönetmenizi ve sonuca güvenle ilerlemenizi sağlar.
+          </p>
+        </div>
+      </div>
+
+      <!-- Uygulama -->
+      <div class="service-detail fade-in">
+        <div class="service-detail-img">
+          <img src="images/otel2.png" alt="Uygulama"/>
+        </div>
+        <div class="service-detail-content">
+          <span class="font-label-caps tag" style="color:var(--primary);letter-spacing:0.3em;">ADIM 03</span>
+          <h2 class="font-headline-lg" style="margin-bottom:24px;">Uygulama</h2>
+          <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;">
+            Tasarımın hayata geçirilmesi aşamasında 50'yi aşkın kişilik, bünyemizde yer alan deneyimli ve koordineli ekibimizle projenin başından sonuna kesintisiz hizmet sunuyoruz. 
+          </p>
+          <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;margin-top:16px;">
+            Alçıpan ve bölme duvardan zemin kaplamaya, boyadan elektrik-tesisata, mobilyadan dekorasyona kadar tüm imalat ve montaj işleri tek çatı altında, anahtar teslim olarak tamamlanmaktadır.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== ADVANTAGE SECTION ===== -->
+<section style="padding:120px 24px; background:var(--surface-container-low); position:relative; overflow:hidden;">
+  <!-- Decorative diagonal line -->
+  <div style="position:absolute;top:0;right:20%;width:1px;height:100%;background:linear-gradient(to bottom, transparent, rgba(212,168,83,0.15), transparent);transform:rotate(15deg);"></div>
+  
+  <div class="container fade-in" style="text-align:center; position:relative; z-index:2;">
+    <div style="display:flex;justify-content:center;margin-bottom:32px;">
+      <span class="material-symbols-outlined" style="color:var(--primary);font-size:56px;text-shadow: 0 0 30px rgba(212,168,83,0.3);">verified</span>
+    </div>
+    <h2 class="font-headline-lg" style="color:var(--primary);margin-bottom:32px;">Neden Tek Elden Çalışmak Avantajlıdır?</h2>
+    <p class="font-body-lg" style="color:var(--on-surface-variant);max-width:800px;margin:0 auto 48px;font-size:18px;line-height:1.8;">
+      Tasarım, görselleştirme ve uygulamayı ayrı firmalardan almak; iletişim kopukluklarına, zaman kayıplarına ve bütçe aşımlarına zemin hazırlar. Biz bu üç aşamayı tek bir çatı altında sunarak projenizin tutarlı, zamanında ve öngörülen bütçede tamamlanmasını garanti altına alıyoruz.
+    </p>
+    <a href="iletisim.html" class="btn-primary" style="padding:18px 40px; font-size:13px;">Hemen Teklif Alın</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(to right, transparent, var(--primary), transparent);"></div>
+  <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:24px;">
+    <img src="images/logo-icon.png" alt="Burçak Design" style="height:48px;width:auto;"/>
+    <div class="footer-logo" style="font-size:18px;letter-spacing:0.4em;">BURÇAK DESIGN</div>
+    <p class="font-body-md" style="max-width:480px;text-align:center;opacity:0.6;">Lüks iç mimarlık, 3D modelleme ve tasarım çözümleri ile hayallerinizdeki mekanları gerçeğe dönüştürüyoruz.</p>
+    <div style="display:flex;gap:32px;margin-top:16px;">
+      <a href="hizmetler.html" style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--primary);">Hizmetler</a>
+      <a href="portfolyo.html" style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--on-surface-variant);transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface-variant)'">Portfolyo</a>
+      <a href="iletisim.html" style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--on-surface-variant);transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface-variant)'">İletişim</a>
+    </div>
+    <div style="width:48px;height:1px;background:var(--primary);margin:16px 0;opacity:0.4;"></div>
+    <p class="font-body-md" style="font-size:13px;opacity:0.4;">© 2026 Burçak Design. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav" id="bottomNav">
+  <a href="index.html">
+    <span class="material-symbols-outlined">home_work</span>
+    <span>Ana Sayfa</span>
+  </a>
+  <a href="hizmetler.html" class="active">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">architecture</span>
+    <span>Hizmetler</span>
+  </a>
+  <a href="portfolyo.html">
+    <span class="material-symbols-outlined">layers</span>
+    <span>Portfolyo</span>
+  </a>
+  <a href="iletisim.html">
+    <span class="material-symbols-outlined">mail</span>
+    <span>İletişim</span>
+  </a>
+</nav>
+
+<script>
+// Mobile menu
+document.getElementById('menuOpen').addEventListener('click', () => {
+  document.getElementById('mobileNav').classList.add('open');
+});
+document.getElementById('menuClose').addEventListener('click', () => {
+  document.getElementById('mobileNav').classList.remove('open');
+});
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Header scroll effect
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('main-header');
+  const current = window.scrollY;
+  
+  if (current > 80) {
+    header.style.background = 'rgba(10,11,13,0.92)';
+    header.style.borderBottomColor = 'rgba(212,168,83,0.12)';
+  } else {
+    header.style.background = 'rgba(10,11,13,0.6)';
+    header.style.borderBottomColor = 'rgba(212,168,83,0.06)';
+  }
+});
+</script>
+</body>
+</html>

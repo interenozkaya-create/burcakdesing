@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Burçak Design - Portfolio</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&amp;family=Noto+Serif:wght@300;400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for masonry if needed, though hidden is better for luxury */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1F1F1F;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#1b1c1c",
+                        "surface-tint": "#e9c176",
+                        "surface-container-high": "#292a2a",
+                        "primary-fixed-dim": "#e9c176",
+                        "on-tertiary-fixed": "#1b1b1c",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "background": "#121414",
+                        "primary": "#e9c176",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "secondary": "#c9c6c5",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#c5a059",
+                        "tertiary": "#c8c6c5",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#343535",
+                        "surface-variant": "#343535",
+                        "primary-fixed": "#ffdea5",
+                        "surface-dim": "#121414",
+                        "surface": "#121414",
+                        "on-error": "#690005",
+                        "tertiary-container": "#a7a5a5",
+                        "on-primary-container": "#4e3700",
+                        "surface-container": "#1f2020",
+                        "secondary-container": "#4a4949",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-background": "#e3e2e2",
+                        "on-primary": "#412d00",
+                        "outline-variant": "#4e4639",
+                        "on-primary-fixed-variant": "#5d4201",
+                        "on-primary-fixed": "#261900",
+                        "on-surface": "#e3e2e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-bright": "#383939",
+                        "inverse-surface": "#e3e2e2",
+                        "on-secondary-fixed-variant": "#474646",
+                        "on-surface-variant": "#d1c5b4",
+                        "on-tertiary": "#303030",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-tertiary-container": "#3b3b3b",
+                        "on-secondary": "#313030",
+                        "inverse-primary": "#775a19",
+                        "inverse-on-surface": "#2f3031",
+                        "on-secondary-container": "#bab8b7",
+                        "tertiary-fixed": "#e5e2e1",
+                        "outline": "#9a8f80",
+                        "surface-container-lowest": "#0d0e0f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "32px",
+                        "margin-desktop": "80px",
+                        "container-max": "1440px",
+                        "section-padding": "160px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Manrope", "sans-serif"],
+                        "headline-lg": ["Noto Serif", "serif"],
+                        "headline-md": ["Noto Serif", "serif"],
+                        "body-lg": ["Manrope", "sans-serif"],
+                        "display-xl": ["Noto Serif", "serif"],
+                        "body-md": ["Manrope", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.2em", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.03em", "fontWeight": "300" }],
+                        "display-xl": ["80px", { "lineHeight": "90px", "letterSpacing": "-0.02em", "fontWeight": "300" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+    
+    .project-card {
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+      opacity: 1;
+    }
+    
+    .filter-btn {
+      cursor: pointer;
+      transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen antialiased selection:bg-primary/30 selection:text-primary">
+
+<!-- Project Modal -->
+<div id="projectModal" class="fixed inset-0 bg-black/80 opacity-0 invisible transition-all duration-500 flex items-center justify-center z-50 backdrop-blur-sm">
+  <div class="bg-surface-container-low border border-outline-variant/20 rounded-xl p-8 max-w-2xl w-full mx-4 transform scale-95 transition-transform duration-500" id="modalContent">
+    <button id="closeModal" class="absolute top-6 right-6 text-on-surface hover:text-primary transition-colors">
+      <span class="material-symbols-outlined text-2xl">close</span>
+    </button>
+    <img id="modalImage" src="" alt="Project" class="w-full h-auto rounded-lg mb-6 max-h-96 object-cover"/>
+    <span id="modalCategory" class="font-label-caps text-label-caps text-primary mb-3 inline-block"></span>
+    <h2 id="modalTitle" class="font-headline-lg text-headline-lg text-on-surface"></h2>
+  </div>
+</div>
+
+<!-- TopAppBar (Shared Component) -->
+<header class="fixed z-50 bg-neutral-950/80 backdrop-blur-2xl docked full-width top-0 rounded-none border-b-[0.5px] border-yellow-900/30 flat no-shadows flex justify-between items-center w-full px-8 py-4">
+<!-- Leading Icon -->
+<button class="text-neutral-500 hover:text-yellow-400 transition-colors duration-300 focus:outline-none flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<!-- Headline / Brand Logo -->
+<div class="text-lg font-light tracking-[0.3em] text-yellow-600 font-serif uppercase">
+            BURÇAK DESIGN
+        </div>
+<!-- Trailing Avatar -->
+<div class="w-8 h-8 rounded-full overflow-hidden border border-yellow-900/30">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmZHUMMTuS06HrYqMfsXCVg2X83hiY8IzlekPg5REyQkNfAbiLUgIvPYWwyXyaP2PPEK32U1xfso-prfBejImYXZ_58shXICc8B9vtwBLDGOk53OotSr0vwJRNonlefb5X7uQYLs_RC3hCiUtaftpK-UwO-c_-xN9POoLE-F1B7cmhHABaCgxufYcB3kZP7icgE5QNlBfSoYYUwn4lSYanIa0vNFM8sAXEvZLVGqgNnszVwgOIVgjou1dZ9zmOAqikwFIsSNjGqJIj"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[120px] pb-32 md:pb-section-padding max-w-container-max mx-auto px-6 md:px-margin-desktop">
+<!-- Page Header -->
+<section class="mb-gutter md:mb-section-padding/2 mt-16">
+<h1 class="font-display-xl text-display-xl text-on-surface mb-6 relative inline-block">
+                Selected Works
+                <!-- Atmospheric lighting accent behind text -->
+<div class="absolute -inset-10 bg-primary/10 rounded-full blur-[80px] -z-10 opacity-50"></div>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                A curated selection of our finest architectural and interior interventions. Exploring the interplay of light, form, and raw materiality.
+            </p>
+</section>
+<!-- Filter Bar -->
+<div class="flex items-center gap-8 mb-12 border-b-[0.5px] border-outline-variant/30 pb-4 overflow-x-auto no-scrollbar">
+<button class="filter-btn font-label-caps text-label-caps text-primary border-b border-primary pb-1 whitespace-nowrap tracking-widest uppercase" data-filter="all">
+                Tümü
+            </button>
+<button class="filter-btn font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-colors duration-300 pb-1 whitespace-nowrap tracking-widest uppercase" data-filter="residential">
+                Ev
+            </button>
+<button class="filter-btn font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-colors duration-300 pb-1 whitespace-nowrap tracking-widest uppercase" data-filter="commercial">
+                Mağaza
+            </button>
+<button class="filter-btn font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-colors duration-300 pb-1 whitespace-nowrap tracking-widest uppercase" data-filter="renovation">
+                Ofis
+            </button>
+</div>
+<!-- Masonry Grid -->
+<div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+<!-- Project Card 1: The Obsidian Penthouse -->
+<article class="project-card relative group break-inside-avoid overflow-hidden border-[0.5px] border-outline-variant/20 bg-surface-container-low cursor-pointer" data-category="residential" data-project-title="The Obsidian Penthouse" data-project-category="Residential">
+<div class="aspect-[3/4] w-full bg-surface-container-highest">
+<img class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" data-alt="Dark, moody luxury penthouse interior with nero marquina marble kitchen island, smoked glass accents, and warm low-level architectural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtBuGJqEHRdz85dTk6sQ1Qaa1cUxWbLNUAemjLw_Mfa-0ufIy_tsV_bEVR0kFh8kJv1YV1y3juKZeT2c203a_L_EZpkjFkJHrehSgPdJrPMOxCADjBOfwB3ZP2UkydBJie3gJ8Eb2Tuq-RZRU8_Ee7rMGuqxS6uoxJfILpkEtO68MVXF8t4ztVZykdbYWplC4cwYnKFVsTSPil7h7PFGWhlOz5gzyjMwfng53tgve0BtO_h_KB8NdoGUY-RUnRr_7nIW2Hl7WytVby"/>
+</div>
+<!-- Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+<span class="font-label-caps text-label-caps text-primary mb-3">Residential</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">The Obsidian Penthouse</h2>
+</div>
+</article>
+<!-- Project Card 2: Bosphorus Office -->
+<article class="project-card relative group break-inside-avoid overflow-hidden border-[0.5px] border-outline-variant/20 bg-surface-container-low cursor-pointer" data-category="commercial" data-project-title="Bosphorus Office" data-project-category="Commercial">
+<div class="aspect-square w-full bg-surface-container-highest">
+<img class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" data-alt="High-end corporate office interior with brushed brass details, dark oak paneling, and dramatic spotlighting on leather furniture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBLztOu1UnF8mNoX-GmRJmrQH-JhIah50UC8qAjXOdyb_IVsYX4Zp4GIz20LqIFvWTihwVs1-gWbTr0Y-ueUZpXtuOKWTUfV9oX4KZ5znGgJSoxYNUAXuzPxErADby8yP2ongOHvZnmnOk0kWC_61two9gh1grtoglC4nTzimVHKWcy-disgu_w1HvCfgpPyzkJwB7oM8jr1ksYAFHeIXlRIwJOMcuStJboj_M8FrBFaoB3O1YMPMvycOrtolQJ8bSj-JDs54D-yGI"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+<span class="font-label-caps text-label-caps text-primary mb-3">Commercial</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Bosphorus Office</h2>
+</div>
+</article>
+<!-- Project Card 3: Aegean Villa -->
+<article class="project-card relative group break-inside-avoid overflow-hidden border-[0.5px] border-outline-variant/20 bg-surface-container-low cursor-pointer" data-category="residential" data-project-title="Aegean Villa" data-project-category="Residential">
+<div class="aspect-[4/5] w-full bg-surface-container-highest">
+<img class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" data-alt="Minimalist luxury villa exterior at twilight, concrete walls, warm amber interior lighting contrasting with deep blue evening sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxDfXH5-XU5SYktC0xAfNQT-GIAOwheh35g8PPP-HyUxcVhOyH3LGCkIPS4stsJ6lyhnbLNkbvNl4-GXaKkJNRVzy79dz8WNgEXU8ExAPTkWa2KEEaTdUXGf2kFNJOZB8EHdT3WI3T44YG9e93dJnnOZRgLOr_C9KkI_FrXSVQTYzEh5FzWLZwL1Uz__PcHcX8aYoY_2uocyoBvdfuFiYOxWeZg2efcI5SSZiEB8epeGUxMFq0ZCDS2VN8rRJ5-B_vUzQPIoNQpZV0"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+<span class="font-label-caps text-label-caps text-primary mb-3">Residential</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Aegean Villa</h2>
+</div>
+</article>
+<!-- Project Card 4: Nero Marquina Lobby -->
+<article class="project-card relative group break-inside-avoid overflow-hidden border-[0.5px] border-outline-variant/20 bg-surface-container-low cursor-pointer" data-category="commercial" data-project-title="Nero Marquina Lobby" data-project-category="Commercial">
+<div class="aspect-[3/4] w-full bg-surface-container-highest">
+<img class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" data-alt="Grand hotel lobby featuring expansive black marble floors, dark textured walls, and a focal point of glowing brushed gold architectural elements" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC23NvgRbRH0z2zzk1g_bmRo1DxU6rzxkkP67q49o5eeJLOG_nJOqMqdQndZIBL7xWjemUXfOl-fzfLs7lILA2Z_ebyukFN4xBNh-6itp_OX3BfItmslGuqb8j1Nyene4o9UOYG1fdr-qn8Bq-rYHwdaBC65ieIZsgWC-OJizEOmvXofXcq3VbCvWgrXs8lxAUOQuWk9C3vhdgucoTyi51M8_h2WXbnbebIGH2lD_n7nomNukHpA2dexVpiQ1rSlcbzZqxQI9Ume7Pv"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+<span class="font-label-caps text-label-caps text-primary mb-3">Commercial</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Nero Marquina Lobby</h2>
+</div>
+</article>
+<!-- Project Card 5: Smoked Oak Residence -->
+<article class="project-card relative group break-inside-avoid overflow-hidden border-[0.5px] border-outline-variant/20 bg-surface-container-low cursor-pointer" data-category="renovation" data-project-title="Smoked Oak Residence" data-project-category="Renovation">
+<div class="aspect-[4/3] w-full bg-surface-container-highest">
+<img class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" data-alt="Intimate living room setting with extensive smoked oak millwork, dark linen upholstery, and a crackling modern fireplace casting warm light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzBI_95q4-TmiiVl1kebeCPHjy99ub44EhI12plYir7ih9KnurS6iDBF8s_JIOFzUBif3U8VVXMnoys9mXaAaHQUe6VBYzAq7T1PCzbdgL-n6buyChnJwPHqQmS1L-IuuomFQrYOY8_6aLbrF5q4eAukMkBzwLPqv89mr1n4As3sOkMsmnSFs8Cbcg7n4jCmuvMc1H9-L0ugNww6WXAMdtOSzedoD7jdsaefWiiAkOULj2FocredzwZ2fhqdjZEltgvcKpE4EG3zPk"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+<span class="font-label-caps text-label-caps text-primary mb-3">Renovation</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Smoked Oak Residence</h2>
+</div>
+</article>
+<!-- Project Card 6: The Glass Pavilion -->
+<article class="project-card relative group break-inside-avoid overflow-hidden border-[0.5px] border-outline-variant/20 bg-surface-container-low cursor-pointer" data-category="residential" data-project-title="The Glass Pavilion" data-project-category="Residential">
+<div class="aspect-[3/4] w-full bg-surface-container-highest">
+<img class="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" data-alt="Modern architectural glass pavilion surrounded by dark silhouettes of trees, interior softly illuminated in warm amber tones against the night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJAWhCH5jVUVhFnJYRnWcSrbI0ExYW08vclUzbDsKItvVo7vLqv9m2JbI15-moef-8zFHa1n-G5VIfF62mIaoY6k-cOGjoafuuEMprLKPXhaU_mzfmRNp57JW0vluaai_ksmZBJ7K_11I654m48VjNFJcdthIwRMfNsq8BMXVhWE2HPGfcT37NlbVQq05zwL_0t-Ermzg58wmHPhaTG1T37Csic3Gs6KHJNiaI8rhZ2eoVOTWd7zLBXZa2_dECA5AW9lW7ghRd_p-w"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+<span class="font-label-caps text-label-caps text-primary mb-3">Residential</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">The Glass Pavilion</h2>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar (Shared Component - Mobile Only) -->
+<!-- Active State Logic: User is on Portfolio, so index 2 ("Portfolio") gets active styles -->
+<nav class="md:hidden bg-neutral-950/90 backdrop-blur-3xl fixed bottom-0 w-full z-50 rounded-none border-t-[0.5px] border-yellow-900/30 flat no-shadows fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-2">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-neutral-600 pt-2 hover:bg-neutral-900/50 w-full rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">home_work</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.15em]">Home</span>
+</a>
+<!-- Services (Inactive) -->
+<a class="flex flex-col items-center justify-center text-neutral-600 pt-2 hover:bg-neutral-900/50 w-full rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">architecture</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.15em]">Services</span>
+</a>
+<!-- Portfolio (Active) -->
+<!-- style_interactions: Active: scale-95 transition-transform handled via group/peer logic or direct inline if needed, keeping it simple structurally here -->
+<a class="flex flex-col items-center justify-center text-yellow-500 font-bold border-t-2 border-yellow-600 pt-2 hover:bg-neutral-900/50 w-full rounded-lg transition-colors transform scale-95" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">layers</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.15em]">Portfolio</span>
+</a>
+<!-- Contact (Inactive) -->
+<a class="flex flex-col items-center justify-center text-neutral-600 pt-2 hover:bg-neutral-900/50 w-full rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">mail</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.15em]">Contact</span>
+</a>
+</nav>
+
+<script>
+  // Portfolio Filtreleme Sistemi
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    const projectModal = document.getElementById('projectModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalContent = document.getElementById('modalContent');
+
+    // Filter functionality
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const filterValue = this.getAttribute('data-filter');
+
+        // Buton stillerini güncelle
+        filterButtons.forEach(btn => {
+          btn.classList.remove('text-primary', 'border-b', 'border-primary');
+          btn.classList.add('text-on-surface-variant', 'hover:text-on-surface');
+        });
+        
+        this.classList.remove('text-on-surface-variant', 'hover:text-on-surface');
+        this.classList.add('text-primary', 'border-b', 'border-primary');
+
+        // Projeleri filtrele
+        projectCards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+          
+          if (filterValue === 'all' || cardCategory === filterValue) {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+            }, 10);
+          } else {
+            card.style.opacity = '0';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+
+    // Modal functionality
+    function openModal(card) {
+      const imageSrc = card.querySelector('img').src;
+      const title = card.getAttribute('data-project-title');
+      const category = card.getAttribute('data-project-category');
+
+      modalImage.src = imageSrc;
+      modalTitle.textContent = title;
+      modalCategory.textContent = category;
+
+      projectModal.classList.remove('opacity-0', 'invisible');
+      modalContent.classList.remove('scale-95');
+      projectModal.classList.add('opacity-100');
+      modalContent.classList.add('scale-100');
+    }
+
+    function closeModal() {
+      projectModal.classList.add('opacity-0', 'invisible');
+      modalContent.classList.remove('scale-100');
+      modalContent.classList.add('scale-95');
+    }
+
+    // Project card click handlers
+    projectCards.forEach(card => {
+      card.addEventListener('click', function() {
+        if (this.style.display !== 'none') {
+          openModal(this);
+        }
+      });
+    });
+
+    // Close modal handlers
+    closeModalBtn.addEventListener('click', closeModal);
+    projectModal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Keyboard close
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !projectModal.classList.contains('invisible')) {
+        closeModal();
+      }
+    });
+  });
+</script>
+</body></html>

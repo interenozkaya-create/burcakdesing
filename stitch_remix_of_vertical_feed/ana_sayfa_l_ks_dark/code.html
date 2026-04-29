@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Burçak Design - Home</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&amp;family=Noto+Serif:wght@300;400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#1b1c1c",
+                        "surface-tint": "#e9c176",
+                        "surface-container-high": "#292a2a",
+                        "primary-fixed-dim": "#e9c176",
+                        "on-tertiary-fixed": "#1b1b1c",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "background": "#121414",
+                        "primary": "#e9c176",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "secondary": "#c9c6c5",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#c5a059",
+                        "tertiary": "#c8c6c5",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#343535",
+                        "surface-variant": "#343535",
+                        "primary-fixed": "#ffdea5",
+                        "surface-dim": "#121414",
+                        "surface": "#121414",
+                        "on-error": "#690005",
+                        "tertiary-container": "#a7a5a5",
+                        "on-primary-container": "#4e3700",
+                        "surface-container": "#1f2020",
+                        "secondary-container": "#4a4949",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-background": "#e3e2e2",
+                        "on-primary": "#412d00",
+                        "outline-variant": "#4e4639",
+                        "on-primary-fixed-variant": "#5d4201",
+                        "on-primary-fixed": "#261900",
+                        "on-surface": "#e3e2e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-bright": "#383939",
+                        "inverse-surface": "#e3e2e2",
+                        "on-secondary-fixed-variant": "#474646",
+                        "on-surface-variant": "#d1c5b4",
+                        "on-tertiary": "#303030",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-tertiary-container": "#3b3b3b",
+                        "on-secondary": "#313030",
+                        "inverse-primary": "#775a19",
+                        "inverse-on-surface": "#2f3031",
+                        "on-secondary-container": "#bab8b7",
+                        "tertiary-fixed": "#e5e2e1",
+                        "outline": "#9a8f80",
+                        "surface-container-lowest": "#0d0e0f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "32px",
+                        "margin-desktop": "80px",
+                        "container-max": "1440px",
+                        "section-padding": "160px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Manrope", "sans-serif"],
+                        "headline-lg": ["Noto Serif", "serif"],
+                        "headline-md": ["Noto Serif", "serif"],
+                        "body-lg": ["Manrope", "sans-serif"],
+                        "display-xl": ["Noto Serif", "serif"],
+                        "body-md": ["Manrope", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.2em", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.03em", "fontWeight": "300" }],
+                        "display-xl": ["80px", { "lineHeight": "90px", "letterSpacing": "-0.02em", "fontWeight": "300" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        /* Custom selection color */
+        ::selection {
+            background: theme('colors.primary-container');
+            color: theme('colors.on-primary-container');
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.background');
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-container-highest');
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen pb-[100px] md:pb-0">
+<!-- TopAppBar Shared Component -->
+<header class="bg-neutral-950/80 backdrop-blur-2xl fixed top-0 rounded-none w-full z-50 border-b-[0.5px] border-yellow-900/30 flex justify-between items-center px-8 py-4">
+<button class="material-symbols-outlined text-yellow-600 hover:text-yellow-400 transition-colors duration-300 opacity-100 focus:outline-none">
+            menu
+        </button>
+<h1 class="text-lg font-light tracking-[0.3em] text-yellow-600 uppercase font-serif">
+            BURÇAK DESIGN
+        </h1>
+<button class="material-symbols-outlined text-yellow-600 hover:text-yellow-400 transition-colors duration-300 opacity-100 focus:outline-none">
+            account_circle
+        </button>
+</header>
+<!-- Hero Section -->
+<section class="relative w-full h-screen flex flex-col justify-center items-center px-6 md:px-margin-desktop overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<img alt="Hero Interior" class="w-full h-full object-cover object-center opacity-40" data-alt="Luxurious dark living room with Nero Marquina marble accents, smoked oak paneling, dramatic spotlighting on high-end furniture, moody cinematic atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhW-_r-F1hAtjTzs1_WliP3bQkbNtXgoRKvPdBLCsxjycQ9PD0yGsga9PNCj1lUpA_guhNmkbmrJ0IorLIs5zOMWydSsPwqHzpHrLWaf5wzRZX_OwSFXX-P1uC_LB6n5PqxHHMC76PSMS_T_oOyzsyiybqRDMdvL7Ze1n24wFccOxUJu4NVcPAWe9gUeLhP11AR5FodN5mUG_r9mCH5qXzLcI8f7eKORpmUjg0ysIKteSJ4oHy_9sHXaOx6vunZyJlZsetncfzU0Xf"/>
+<!-- Atmospheric Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<div class="absolute inset-0 bg-radial-gradient from-primary/10 via-transparent to-transparent opacity-50"></div>
+</div>
+<!-- Content -->
+<div class="relative z-10 max-w-container-max w-full text-center mt-20">
+<h2 class="font-display-xl text-[48px] md:text-display-xl text-primary max-w-4xl mx-auto leading-tight">
+                Düşlerinizdeki Mekanları Tasarlıyoruz
+            </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-8 max-w-2xl mx-auto">
+                Bespoke architectural solutions where light meets shadow, and materiality defines luxury.
+            </p>
+<div class="mt-16 flex justify-center">
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-8 py-4 uppercase tracking-[0.2em] transition-colors hover:bg-primary-fixed">
+                    Projeleri İncele
+                </button>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10 opacity-60">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-4 uppercase">Keşfet</span>
+<div class="w-[1px] h-16 bg-gradient-to-b from-primary to-transparent"></div>
+</div>
+</section>
+<!-- Featured Projects Section -->
+<section class="py-[160px] px-6 md:px-margin-desktop max-w-container-max mx-auto">
+<div class="mb-20 flex flex-col md:flex-row justify-between items-end gap-8 border-b-[0.5px] border-outline-variant pb-8">
+<h3 class="font-headline-lg text-headline-lg text-on-background">Öne Çıkan Projeler</h3>
+<a class="font-label-caps text-label-caps text-primary uppercase flex items-center gap-2 group" href="#">
+                Tümünü Gör
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Asymmetric Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-[32px]">
+<!-- Large Featured Project -->
+<div class="md:col-span-8 group relative overflow-hidden h-[600px] border-[0.5px] border-outline/30 cursor-pointer">
+<img alt="Project 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Minimalist high-end modern kitchen with dark matte surfaces, brushed brass fixtures, subtle warm under-cabinet lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvBXl4G1w8PFnT3ZSZxEOCfXWsL4tLng4kEY9LOKBolF4p-0DyPsPmg615Slwsi4OcdBfcFWpbTjYVOGz-8Cp_iSSD2OqPc1-UkjIJhuKES4DQbJ6RD4yAHCH_IVe3Wzydnz9DFsoFM9nUX5S-2HWvr93haRshYm0-S2Z2pClvFoOX7DBw0tih03qave-lv2C4mKR8NyGwMJfG-VjDTWDWyomjC5H5dEeCS-ZU369deK9ynvbXd4FJEfRQO9qRyi7Vu2okibMQWml8"/>
+<div class="absolute inset-0 bg-surface-container-high/0 group-hover:bg-surface-container-high/80 transition-colors duration-500 flex flex-col justify-end p-8 opacity-0 group-hover:opacity-100">
+<span class="font-label-caps text-label-caps text-primary mb-2">Residential</span>
+<h4 class="font-headline-md text-headline-md text-on-background">The Obsidian Villa</h4>
+</div>
+</div>
+<!-- Smaller Project 1 -->
+<div class="md:col-span-4 group relative overflow-hidden h-[600px] border-[0.5px] border-outline/30 cursor-pointer">
+<img alt="Project 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Luxury bathroom with Nero Marquina marble walls, free-standing black bathtub, warm ambient lighting reflecting off dark stone" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqLZKnaWHKMAJADxAqyPzd_AbXF7IPQ-0Bc1pOLv2WfuTuaYHFYJE-p7gXRxEioytCdBPG6t7p5GHNw_z_IrK80I-5867ARkLuSVL542J7L4Oy1CpJM9HVzFolod2dNyDJ4XFU-IDIZlfRPBDg_Fe6-pJGWVK1o83P9AgfaEoH_xZeAVIm8BQom4hoCgXuUeI9G5s1rgRhLtQZw1Nr7aGJtRwM72Zv8OPvv8wuLq4Z4sumix-B8lebXH05g2bV8TbVLUPBHk3RSxVJ"/>
+<div class="absolute inset-0 bg-surface-container-high/0 group-hover:bg-surface-container-high/80 transition-colors duration-500 flex flex-col justify-end p-8 opacity-0 group-hover:opacity-100">
+<span class="font-label-caps text-label-caps text-primary mb-2">Hospitality</span>
+<h4 class="font-headline-md text-headline-md text-on-background">Aura Spa Retreat</h4>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="py-[160px] px-6 md:px-margin-desktop bg-surface-container-lowest border-y-[0.5px] border-outline-variant/30">
+<div class="max-w-container-max mx-auto">
+<div class="mb-20 text-center">
+<h3 class="font-headline-lg text-headline-lg text-on-background">Hizmet Alanlarımız</h3>
+<div class="w-12 h-[1px] bg-primary mx-auto mt-8"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-[32px]">
+<!-- Service Item 1 -->
+<div class="flex flex-col items-center text-center group cursor-default">
+<div class="w-20 h-20 rounded-full border-[0.5px] border-outline-variant flex items-center justify-center mb-8 group-hover:border-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary transition-colors duration-300">architecture</span>
+</div>
+<h4 class="font-label-caps text-label-caps text-on-background mb-4">Mimari Tasarım</h4>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+                        Bespoke structural concepts blending high-end minimalism with functional elegance.
+                    </p>
+</div>
+<!-- Service Item 2 -->
+<div class="flex flex-col items-center text-center group cursor-default">
+<div class="w-20 h-20 rounded-full border-[0.5px] border-outline-variant flex items-center justify-center mb-8 group-hover:border-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary transition-colors duration-300">chair</span>
+</div>
+<h4 class="font-label-caps text-label-caps text-on-background mb-4">İç Mekan Tasarımı</h4>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+                        Curated interiors focusing on tactile materiality, moody atmospheres, and custom finishes.
+                    </p>
+</div>
+<!-- Service Item 3 -->
+<div class="flex flex-col items-center text-center group cursor-default">
+<div class="w-20 h-20 rounded-full border-[0.5px] border-outline-variant flex items-center justify-center mb-8 group-hover:border-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary transition-colors duration-300">view_in_ar</span>
+</div>
+<h4 class="font-label-caps text-label-caps text-on-background mb-4">3D Görselleştirme</h4>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+                        Photorealistic rendering communicating the interplay of light and shadow before realization.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- BottomNavBar Shared Component (Mobile Only) -->
+<nav class="md:hidden bg-neutral-950/90 backdrop-blur-3xl fixed bottom-0 left-0 w-full z-50 rounded-none border-t-[0.5px] border-yellow-900/30 flex justify-around items-center px-4 pb-6 pt-2">
+<!-- Home (Active) -->
+<button class="flex flex-col items-center justify-center text-yellow-500 font-bold border-t-2 border-yellow-600 pt-2 scale-95 transition-transform hover:bg-neutral-900/50 w-full focus:outline-none">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home_work</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.15em] mt-1">Home</span>
+</button>
+<!-- Services (Inactive) -->
+<button class="flex flex-col items-center justify-center text-neutral-600 pt-2 hover:bg-neutral-900/50 w-full transition-colors duration-300 focus:outline-none">
+<span class="material-symbols-outlined">architecture</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.15em] mt-1">Services</span>
+</button>
+<!-- Portfolio (Inactive) -->
+<button class="flex flex-col items-center justify-center text-neutral-600 pt-2 hover:bg-neutral-900/50 w-full transition-colors duration-300 focus:outline-none">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.15em] mt-1">Portfolio</span>
+</button>
+<!-- Contact (Inactive) -->
+<button class="flex flex-col items-center justify-center text-neutral-600 pt-2 hover:bg-neutral-900/50 w-full transition-colors duration-300 focus:outline-none">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.15em] mt-1">Contact</span>
+</button>
+</nav>
+</body></html>
