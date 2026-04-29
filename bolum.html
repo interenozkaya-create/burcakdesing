@@ -267,7 +267,7 @@ if (!sectionId) {
     items.forEach(item => {
       if (item.type === 'image') {
         const card = document.createElement('div');
-        card.className = 'section-card fade-in';
+        card.className = 'section-card fade-in visible';
         card.innerHTML = `
           <img src="${item.imageUrl}" alt="${item.title || ''}" loading="lazy">
           ${(item.title || item.caption) ? `<div class="section-card-body">
@@ -279,7 +279,7 @@ if (!sectionId) {
         observer.observe(card);
       } else {
         const card = document.createElement('div');
-        card.className = 'section-text-card fade-in';
+        card.className = 'section-text-card fade-in visible';
         card.innerHTML = `
           <p class="section-text-content">${item.content || ''}</p>
           ${item.title ? `<p class="section-text-author">${item.title}</p>` : ''}
