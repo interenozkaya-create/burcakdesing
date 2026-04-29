@@ -313,7 +313,6 @@
             <ul class="nav-menu">
                 <li class="active" onclick="switchTab('portfolio', this)">Portfolyo Yönetimi</li>
                 <li onclick="switchTab('navigation', this)">Navigasyon Yönetimi</li>
-                <li onclick="switchTab('sections', this)">Özel Bölümler</li>
                 <li onclick="switchTab('categories', this)">Kategoriler</li>
                 <li onclick="switchTab('settings_home', this)">Ana Sayfa Metinleri</li>
                 <li onclick="switchTab('settings_about', this)">Hakkımda Metinleri</li>
@@ -407,84 +406,6 @@
                 </div>
             </div>
 
-            <!-- SECTIONS TAB -->
-            <div id="tab-sections" class="tab-content">
-                <div class="header">
-                    <h2>Özel Bölümler</h2>
-                    <p>Referanslar gibi özel sayfalar oluşturun ve görsel/metin ekleyin.</p>
-                </div>
-                <!-- Section list panel -->
-                <div class="add-project-form" id="sections-list-panel">
-                    <h3 style="margin-top:0;">Yeni Bölüm Oluştur</h3>
-                    <div class="row">
-                        <div class="col">
-                            <label>Bölüm Adı</label>
-                            <input type="text" id="new-section-title" placeholder="Örn: Basın" class="form-control" oninput="autoFillSectionId(this.value)">
-                        </div>
-                        <div class="col">
-                            <label>URL Adresi <small style="color:#888;">(otomatik dolar)</small></label>
-                            <input type="text" id="new-section-id" placeholder="basin" class="form-control" style="color:#aaa;">
-                        </div>
-                    </div>
-                    <button class="btn" onclick="addCustomSection()">Bölüm Oluştur</button>
-                    <h3 style="margin-top:30px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);">Mevcut Bölümler</h3>
-                    <div id="sections-list" style="display:flex;flex-direction:column;gap:10px;margin-top:15px;">
-                        <p>Yükleniyor...</p>
-                    </div>
-                </div>
-                <!-- Section content editor -->
-                <div class="add-project-form" id="section-editor" style="display:none;">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-                        <h3 id="section-editor-title" style="margin:0;"></h3>
-                        <button onclick="closeSectionEditor()" style="background:#333;border:none;color:white;padding:8px 16px;border-radius:4px;cursor:pointer;">← Geri</button>
-                    </div>
-                    <!-- Image block -->
-                    <div style="background:rgba(255,255,255,0.03);padding:20px;border-radius:8px;border:1px solid #333;margin-bottom:20px;">
-                        <h4 style="margin-top:0;color:var(--primary);">Görsel Ekle</h4>
-                        <div class="upload-area" id="section-drop-zone">
-                            <div class="upload-icon">📷</div>
-                            <p id="section-upload-text">Görseli buraya sürükleyin veya tıklayın</p>
-                            <input type="file" id="section-file-input" accept="image/*" style="display:none;">
-                            <div id="section-upload-progress" style="height:4px;background:var(--primary);width:0%;transition:width 0.3s;margin-top:10px;border-radius:2px;"></div>
-                        </div>
-                        <div class="row" style="margin-top:15px;">
-                            <div class="col">
-                                <label>Görsel Başlığı (Opsiyonel)</label>
-                                <input type="text" id="section-item-title" class="form-control" placeholder="Başlık">
-                            </div>
-                            <div class="col">
-                                <label>Alt Açıklama (Opsiyonel)</label>
-                                <input type="text" id="section-item-caption" class="form-control" placeholder="Kısa açıklama">
-                            </div>
-                        </div>
-                        <button class="btn" id="section-save-image-btn" onclick="saveSectionImageItem()" disabled style="margin-top:15px;">Önce Görsel Yükleyin</button>
-                    </div>
-                    <!-- Text block -->
-                    <div style="background:rgba(255,255,255,0.03);padding:20px;border-radius:8px;border:1px solid #333;margin-bottom:20px;">
-                        <h4 style="margin-top:0;color:var(--primary);">Metin / Referans Ekle</h4>
-                        <div class="row">
-                            <div class="col">
-                                <label>İsim / Başlık</label>
-                                <input type="text" id="section-text-title" class="form-control" placeholder="Örn: Ahmet Yılmaz">
-                            </div>
-                            <div class="col">
-                                <label>Unvan / Alt Bilgi (Opsiyonel)</label>
-                                <input type="text" id="section-text-subtitle" class="form-control" placeholder="Örn: İşletme Sahibi">
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-top:15px;margin-bottom:0;">
-                            <label>İçerik Metni</label>
-                            <textarea id="section-text-content" class="form-control" rows="4" placeholder="Metin içeriği..."></textarea>
-                        </div>
-                        <button class="btn" onclick="saveSectionTextItem()" style="margin-top:15px;">Metin Ekle</button>
-                    </div>
-                    <!-- Items list -->
-                    <h4>Bölümdeki İçerikler:</h4>
-                    <div id="section-items-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:15px;">
-                        <p>Yükleniyor...</p>
-                    </div>
-                </div>
-            </div>
 
             <!-- SETTINGS HOME TAB -->
             <div id="tab-settings_home" class="tab-content">
