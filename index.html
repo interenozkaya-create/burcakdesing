@@ -674,13 +674,13 @@ function updateFilterBar(cats) {
   bar.innerHTML = html;
 }
 
-db.collection('settings').doc('navigation').get().then(doc => {
+db.collection('settings').doc('navigation').get({ source: 'server' }).then(doc => {
   if (doc.exists && doc.data().items && doc.data().items.length) {
     updateNav(doc.data().items);
   }
 });
 
-db.collection('settings').doc('categories').get().then(doc => {
+db.collection('settings').doc('categories').get({ source: 'server' }).then(doc => {
   if (doc.exists && doc.data().list && Object.keys(doc.data().list).length) {
     updateFilterBar(doc.data().list);
   }
