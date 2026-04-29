@@ -206,13 +206,12 @@
     </a>
     <nav class="header-nav">
       <a href="index.html">Ana Sayfa</a>
+      <a href="index.html#hakkimda">Hakkımda</a>
       <a href="hizmetler.html">Hizmetler</a>
       <a href="portfolyo.html" class="active">Portfolyo</a>
       <a href="iletisim.html">İletişim</a>
     </nav>
-    <div style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(233,193,118,0.2);overflow:hidden;">
-      <img src="images/logo-icon.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;"/>
-    </div>
+    
   </div>
 </header>
 
@@ -222,6 +221,7 @@
     <span class="material-symbols-outlined">close</span>
   </button>
   <a href="index.html">Ana Sayfa</a>
+  <a href="index.html#hakkimda">Hakkımda</a>
   <a href="hizmetler.html">Hizmetler</a>
   <a href="portfolyo.html" class="active">Portfolyo</a>
   <a href="iletisim.html">İletişim</a>
@@ -256,125 +256,9 @@
 
     <!-- Gallery -->
     <div class="gallery-grid" id="galleryGrid">
-
-      <!-- Dış Cephe (5 items) -->
-      <div class="gallery-item" data-cat="villa" data-title="Obsidian Villa" data-tag="Villa">
-        <img src="images/villa1.png" alt="Obsidian Villa"/>
-        <div class="gallery-overlay"><span class="tag">Villa</span><h3>Obsidian Villa</h3></div>
+      <div id="gallery-loading" style="grid-column:1/-1;text-align:center;padding:80px 0;color:var(--on-surface-variant);font-family:var(--font-sans);font-size:14px;letter-spacing:0.1em;">
+        Projeler yükleniyor…
       </div>
-      <div class="gallery-item" data-cat="villa" data-title="Noir Residence" data-tag="Villa">
-        <img src="images/villa2.png" alt="Noir Residence"/>
-        <div class="gallery-overlay"><span class="tag">Villa</span><h3>Noir Residence</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="villa" data-title="Shadow House" data-tag="Villa">
-        <img src="images/villa3.png" alt="Shadow House"/>
-        <div class="gallery-overlay"><span class="tag">Villa</span><h3>Shadow House</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="apartman" data-title="Onyx Tower" data-tag="Apartman">
-        <img src="images/apt1.png" alt="Onyx Tower"/>
-        <div class="gallery-overlay"><span class="tag">Apartman</span><h3>Onyx Tower</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="apartman" data-title="Slate Residences" data-tag="Apartman">
-        <img src="images/apt2.png" alt="Slate Residences"/>
-        <div class="gallery-overlay"><span class="tag">Apartman</span><h3>Slate Residences</h3></div>
-      </div>
-
-      <!-- İç Mekan (14 + 11 = 25 items) -->
-      <div class="gallery-item" data-cat="ev" data-title="Obsidian Penthouse" data-tag="Ev">
-        <img src="images/salon1.png" alt="Obsidian Penthouse"/>
-        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Obsidian Penthouse</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ev" data-title="Noir Bedroom Suite" data-tag="Ev">
-        <img src="images/yatak1.png" alt="Noir Bedroom Suite"/>
-        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Noir Bedroom Suite</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ev" data-title="Dark Kitchen" data-tag="Ev">
-        <img src="images/mutfak1.png" alt="Dark Kitchen"/>
-        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Dark Kitchen</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ev" data-title="Spa Bathroom" data-tag="Ev">
-        <img src="images/banyo1.png" alt="Spa Bathroom"/>
-        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Spa Bathroom</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ofis" data-title="Executive Office" data-tag="Ofis">
-        <img src="images/ofis1.png" alt="Executive Office"/>
-        <div class="gallery-overlay"><span class="tag">Ofis</span><h3>Executive Office</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ev" data-title="The Obsidian Kitchen" data-tag="Ev">
-        <img src="images/project1.png" alt="The Obsidian Kitchen"/>
-        <div class="gallery-overlay"><span class="tag">Ev</span><h3>The Obsidian Kitchen</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="otel" data-title="Aura Spa Retreat" data-tag="Otel">
-        <img src="images/project2.png" alt="Aura Spa Retreat"/>
-        <div class="gallery-overlay"><span class="tag">Otel</span><h3>Aura Spa Retreat</h3></div>
-      </div>
-
-      <!-- Yeni eklenecek 16 görsel için hazırlık -->
-      <div class="gallery-item" data-cat="apartman" data-title="Metropolis Highrise" data-tag="Apartman">
-        <img src="images/apt3.png" alt="Metropolis Highrise"/>
-        <div class="gallery-overlay"><span class="tag">Apartman</span><h3>Metropolis Highrise</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="apartman" data-title="Lumina Tower" data-tag="Apartman">
-        <img src="images/apt4.png" alt="Lumina Tower"/>
-        <div class="gallery-overlay"><span class="tag">Apartman</span><h3>Lumina Tower</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ev" data-title="Modern Living Room" data-tag="Ev">
-        <img src="images/ev1.png" alt="Modern Living Room"/>
-        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Modern Living Room</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ev" data-title="Minimalist Dining Area" data-tag="Ev">
-        <img src="images/ev2.png" alt="Minimalist Dining Area"/>
-        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Minimalist Dining Area</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ev" data-title="Luxury Master Bath" data-tag="Ev">
-        <img src="images/ev3.png" alt="Luxury Master Bath"/>
-        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Luxury Master Bath</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ev" data-title="Cozy Reading Nook" data-tag="Ev">
-        <img src="images/ev4.png" alt="Cozy Reading Nook"/>
-        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Cozy Reading Nook</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ev" data-title="Elegant Home Office" data-tag="Ev">
-        <img src="images/ev5.png" alt="Elegant Home Office"/>
-        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Elegant Home Office</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ev" data-title="Zen Bedroom" data-tag="Ev">
-        <img src="images/ev6.png" alt="Zen Bedroom"/>
-        <div class="gallery-overlay"><span class="tag">Ev</span><h3>Zen Bedroom</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ofis" data-title="Creative Studio" data-tag="Ofis">
-        <img src="images/ofis2.png" alt="Creative Studio"/>
-        <div class="gallery-overlay"><span class="tag">Ofis</span><h3>Creative Studio</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ofis" data-title="Corporate Boardroom" data-tag="Ofis">
-        <img src="images/ofis3.png" alt="Corporate Boardroom"/>
-        <div class="gallery-overlay"><span class="tag">Ofis</span><h3>Corporate Boardroom</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="ofis" data-title="Tech Workspace" data-tag="Ofis">
-        <img src="images/ofis4.png" alt="Tech Workspace"/>
-        <div class="gallery-overlay"><span class="tag">Ofis</span><h3>Tech Workspace</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="restoran" data-title="Fine Dining Hall" data-tag="Restoran">
-        <img src="images/restoran2.png" alt="Fine Dining Hall"/>
-        <div class="gallery-overlay"><span class="tag">Restoran</span><h3>Fine Dining Hall</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="restoran" data-title="Cozy Cafe" data-tag="Restoran">
-        <img src="images/restoran3.png" alt="Cozy Cafe"/>
-        <div class="gallery-overlay"><span class="tag">Restoran</span><h3>Cozy Cafe</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="otel" data-title="Grand Lobby" data-tag="Otel">
-        <img src="images/otel2.png" alt="Grand Lobby"/>
-        <div class="gallery-overlay"><span class="tag">Otel</span><h3>Grand Lobby</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="otel" data-title="Luxury Suite" data-tag="Otel">
-        <img src="images/otel3.png" alt="Luxury Suite"/>
-        <div class="gallery-overlay"><span class="tag">Otel</span><h3>Luxury Suite</h3></div>
-      </div>
-      <div class="gallery-item" data-cat="otel" data-title="Rooftop Lounge" data-tag="Otel">
-        <img src="images/otel4.png" alt="Rooftop Lounge"/>
-        <div class="gallery-overlay"><span class="tag">Otel</span><h3>Rooftop Lounge</h3></div>
-      </div>
-
     </div><!-- /gallery-grid -->
 
     <!-- Altın şerit alt -->
@@ -546,7 +430,14 @@ if (!firebase.apps.length) {
 const db = firebase.firestore();
 const galleryGrid = document.getElementById('galleryGrid');
 
-db.collection('projects').orderBy('createdAt', 'asc').get().then((snapshot) => {
+db.collection('projects').orderBy('createdAt', 'desc').get().then((snapshot) => {
+    document.getElementById('gallery-loading').remove();
+
+    if (snapshot.empty) {
+        galleryGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:80px 0;color:var(--on-surface-variant);">Henüz proje eklenmemiş.</p>';
+        return;
+    }
+
     snapshot.forEach(doc => {
         const data = doc.data();
         const item = document.createElement('div');
@@ -554,7 +445,7 @@ db.collection('projects').orderBy('createdAt', 'asc').get().then((snapshot) => {
         item.dataset.cat = data.category;
         item.dataset.title = data.title;
         item.dataset.tag = data.category.charAt(0).toUpperCase() + data.category.slice(1);
-        
+
         item.innerHTML = `
             <img src="${data.imageUrl}" alt="${data.title}">
             <div class="gallery-overlay">
@@ -562,15 +453,15 @@ db.collection('projects').orderBy('createdAt', 'asc').get().then((snapshot) => {
                 <h3>${data.title}</h3>
             </div>
         `;
-        
-        // Yeni projeyi en başa ekle
-        galleryGrid.prepend(item);
+
+        galleryGrid.appendChild(item);
     });
-    
-    // Elemanları güncelle ve eventleri bağla
+
     items = document.querySelectorAll('.gallery-item');
     attachLightboxListeners();
-    applyFilters(); // Filtreleri yeni gelenlere uygula
+    applyFilters();
+}).catch(() => {
+    document.getElementById('gallery-loading').textContent = 'Projeler yüklenirken hata oluştu. Lütfen sayfayı yenileyin.';
 });
 </script>
 </body>

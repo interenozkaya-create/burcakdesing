@@ -29,9 +29,7 @@
       <a href="portfolyo.html">Portfolyo</a>
       <a href="iletisim.html" class="active">İletişim</a>
     </nav>
-    <div style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(212,168,83,0.2);overflow:hidden;">
-      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuALwmopEJjI3pINiTbzpIbyGh2JZI6rVbJj36-XtOb77H0aSrXG6aCRj7QoA-OpLR5UrDUt183aUWruBNtgy9yRxbVqoK681R8HrcAN5VK6X0VE2ufY7Afyy2nFC8Y0Np_ZC9rFQnhqsJu-JeMWDAmTKD4bhfc2ci5uE5z6f0IybssRO56ahSHHTVVJx4OrzNpv6Q61HlmaIH0cQI3XknobFO_vC9M_mYOrSesrF7yRAiQN9-UCFtML_VUU4Jcd4jcsVMlElOI572jR" alt="Avatar" style="width:100%;height:100%;object-fit:cover;"/>
-    </div>
+    
   </div>
 </header>
 
@@ -161,13 +159,18 @@
 </section>
 
 <!-- ===== MAP SECTION ===== -->
-<section style="height:400px; background:#111; position:relative; overflow:hidden;">
-  <div style="position:absolute;inset:0;background:url('https://maps.googleapis.com/maps/api/staticmap?center=Cankaya,Ankara&zoom=14&size=1920x400&maptype=roadmap&style=feature:all|element:labels.text.fill|color:0x8a8a8a&style=feature:all|element:labels.text.stroke|visibility:on|color:0x000000&style=feature:all|element:labels.icon|visibility:off&style=feature:administrative|element:geometry.fill|color:0x000000&style=feature:administrative|element:geometry.stroke|color:0x144b53|lightness:14|weight:1.4&style=feature:landscape|element:all|color:0x080808&style=feature:poi|element:geometry|color:0x0c0c0c|lightness:5&style=feature:road.highway|element:geometry.fill|color:0x000000&style=feature:road.highway|element:geometry.stroke|color:0x0b434f|lightness:25&style=feature:road.arterial|element:geometry.fill|color:0x000000&style=feature:road.arterial|element:geometry.stroke|color:0x0b3d51|lightness:16&style=feature:road.local|element:geometry|color:0x000000&style=feature:transit|element:all|color:0x146474&style=feature:water|element:all|color:0x021019&key=dummy_key') center/cover no-repeat; opacity:0.4; mix-blend-mode:luminosity;"></div>
-  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
-    <div style="background:var(--surface-container-low);padding:16px 24px;border:0.5px solid rgba(212,168,83,0.3);backdrop-filter:blur(8px);display:flex;align-items:center;gap:12px;">
-      <span class="material-symbols-outlined" style="color:var(--primary);">location_on</span>
-      <span class="font-label-caps" style="color:var(--on-surface);">Ankara, Türkiye</span>
+<section style="height:400px; background:var(--surface-container-lowest); position:relative; overflow:hidden; border-top:0.5px solid rgba(212,168,83,0.08);">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, rgba(212,168,83,0.04) 0%, transparent 70%);"></div>
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border:0.5px solid rgba(212,168,83,0.04);border-radius:50%;"></div>
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;border:0.5px solid rgba(212,168,83,0.06);border-radius:50%;"></div>
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;border:0.5px solid rgba(212,168,83,0.08);border-radius:50%;"></div>
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;">
+    <span class="material-symbols-outlined" style="color:var(--primary);font-size:48px;filter:drop-shadow(0 0 20px rgba(212,168,83,0.3));">location_on</span>
+    <div style="background:var(--surface-container-low);padding:16px 32px;border:0.5px solid rgba(212,168,83,0.25);backdrop-filter:blur(8px);text-align:center;">
+      <span class="font-label-caps" style="color:var(--primary);display:block;margin-bottom:4px;font-size:10px;">STÜDYOMUZ</span>
+      <span class="font-body-lg" style="color:var(--on-surface);">Çankaya, Ankara — Türkiye</span>
     </div>
+    <a href="https://maps.google.com/?q=Cankaya+Ankara" target="_blank" style="font-size:12px;letter-spacing:0.15em;color:var(--on-surface-variant);text-transform:uppercase;border-bottom:1px solid rgba(212,168,83,0.3);padding-bottom:2px;transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface-variant)'">Google Maps'te Aç →</a>
   </div>
 </section>
 

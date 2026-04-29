@@ -312,7 +312,10 @@
             </div>
             <ul class="nav-menu">
                 <li class="active" onclick="switchTab('portfolio')">Portfolyo Yönetimi</li>
-                <li onclick="switchTab('settings')">Site Yazıları</li>
+                <li onclick="switchTab('categories')">Kategoriler</li>
+                <li onclick="switchTab('settings_home')">Ana Sayfa Metinleri</li>
+                <li onclick="switchTab('settings_about')">Hakkımda Metinleri</li>
+                <li onclick="switchTab('settings_contact')">İletişim Bilgileri</li>
             </ul>
             <button class="logout-btn" onclick="logout()">Çıkış Yap</button>
         </div>
@@ -363,48 +366,79 @@
             </div>
             </div> <!-- End Portfolio Tab -->
 
-            <!-- SETTINGS TAB -->
-            <div id="tab-settings" class="tab-content">
+            <!-- SETTINGS HOME TAB -->
+            <div id="tab-settings_home" class="tab-content">
                 <div class="header">
-                    <h2>Site Yazıları (İçerik Yönetimi)</h2>
-                    <p>Web sitenizdeki başlıkları ve metinleri buradan değiştirebilirsiniz.</p>
+                    <h2>Ana Sayfa Yazıları</h2>
                 </div>
-
                 <div class="add-project-form">
-                    <h3 style="margin-top:0; color:var(--primary);">Ana Sayfa Metinleri</h3>
-                    
                     <div class="form-group">
                         <label>Büyük Başlık (Örn: Lüksün ve Estetiğin Yeni Tanımı)</label>
                         <input type="text" id="set-hero-title" class="form-control">
                     </div>
-                    
                     <div class="form-group">
                         <label>Alt Başlık (Açıklama Metni)</label>
                         <textarea id="set-hero-desc" class="form-control" rows="3" style="resize:vertical;"></textarea>
                     </div>
-
-                    <h3 style="margin-top:30px; color:var(--primary);">İletişim Bilgileri</h3>
-                    
-                    <div class="row">
-                        <div class="col">
-                            <label>E-posta Adresi</label>
-                            <input type="text" id="set-email" class="form-control">
-                        </div>
-                        <div class="col">
-                            <label>Telefon Numarası</label>
-                            <input type="text" id="set-phone" class="form-control">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Adres</label>
-                        <input type="text" id="set-address" class="form-control">
-                    </div>
-
-                    <button class="btn" id="save-settings-btn" onclick="saveSettings()">Tüm Ayarları Kaydet</button>
+                    <button class="btn" onclick="saveSettings('home', ['set-hero-title', 'set-hero-desc'], ['heroTitle', 'heroDesc'])">Kaydet</button>
                 </div>
-            </div> <!-- End Settings Tab -->
+            </div>
 
+            <!-- SETTINGS ABOUT TAB -->
+            <div id="tab-settings_about" class="tab-content">
+                <div class="header">
+                    <h2>Hakkımda Yazıları</h2>
+                </div>
+                <div class="add-project-form">
+                    <div class="form-group">
+                        <label>Hakkımda 1. Paragraf</label>
+                        <textarea id="set-about-p1" class="form-control" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Hakkımda 2. Paragraf</label>
+                        <textarea id="set-about-p2" class="form-control" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Hakkımda 3. Paragraf</label>
+                        <textarea id="set-about-p3" class="form-control" rows="4"></textarea>
+                    </div>
+                    <button class="btn" onclick="saveSettings('about', ['set-about-p1', 'set-about-p2', 'set-about-p3'], ['aboutP1', 'aboutP2', 'aboutP3'])">Kaydet</button>
+                </div>
+            </div>
+
+            <!-- SETTINGS CONTACT TAB -->
+            <div id="tab-settings_contact" class="tab-content">
+                <div class="header">
+                    <h2>İletişim Bilgileri</h2>
+                </div>
+                <div class="add-project-form">
+                    <div class="row">
+                        <div class="col"><label>E-posta</label><input type="text" id="set-email" class="form-control"></div>
+                        <div class="col"><label>Telefon</label><input type="text" id="set-phone" class="form-control"></div>
+                    </div>
+                    <div class="form-group"><label>Adres</label><input type="text" id="set-address" class="form-control"></div>
+                    <button class="btn" onclick="saveSettings('contact', ['set-email', 'set-phone', 'set-address'], ['email', 'phone', 'address'])">Kaydet</button>
+                </div>
+            </div>
+
+            <!-- CATEGORY TAB -->
+            <div id="tab-categories" class="tab-content">
+                <div class="header">
+                    <h2>Kategori Yönetimi</h2>
+                </div>
+                <div class="add-project-form">
+                    <h3 style="margin-top:0;">Yeni Kategori Ekle</h3>
+                    <div style="display:flex;gap:10px;margin-bottom:30px;">
+                        <input type="text" id="new-cat-id" placeholder="ID (örn: villa)" class="form-control" style="flex:1;">
+                        <input type="text" id="new-cat-name" placeholder="Görünen (örn: Villa / Konut)" class="form-control" style="flex:2;">
+                        <button class="btn" onclick="addCategory()">Ekle</button>
+                    </div>
+                    <h3 style="margin-top:0;">Mevcut Kategoriler</h3>
+                    <div id="category-list" style="display:flex;flex-direction:column;gap:10px;">
+                        <p>Yükleniyor...</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

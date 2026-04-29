@@ -192,46 +192,109 @@ function deleteProject(id, imageUrl) {
 }
 
 // Sekme Değiştirme
-function switchTab(tabId) {
+function switchTab(e, tabId) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
     document.getElementById('tab-' + tabId).classList.add('active');
-    
+
     document.querySelectorAll('.nav-menu li').forEach(li => li.classList.remove('active'));
-    event.currentTarget.classList.add('active');
+    e.currentTarget.classList.add('active');
 }
 
 // Site Ayarları Yükleme
 function loadSettings() {
-    db.collection('settings').doc('general').get().then((doc) => {
-        if (doc.exists) {
-            const data = doc.data();
-            if(data.heroTitle) document.getElementById('set-hero-title').value = data.heroTitle;
-            if(data.heroDesc) document.getElementById('set-hero-desc').value = data.heroDesc;
-            if(data.email) document.getElementById('set-email').value = data.email;
-            if(data.phone) document.getElementById('set-phone').value = data.phone;
-            if(data.address) document.getElementById('set-address').value = data.address;
+    ['home', 'about', 'contact'].forEach(docName => {
+        db.collection('settings').doc(docName).get().then(doc => {
+            if (doc.exists) {
+                const data = doc.data();
+                if(docName === 'home') {
+                    if(data.heroTitle) document.getElementById('set-hero-title').value = data.heroTitle;
+                    if(data.heroDesc) document.getElementById('set-hero-desc').value = data.heroDesc;
+                }
+                if(docName === 'about') {
+                    if(data.aboutP1) document.getElementById('set-about-p1').value = data.aboutP1;
+                    if(data.aboutP2) document.getElementById('set-about-p2').value = data.aboutP2;
+                    if(data.aboutP3) document.getElementById('set-about-p3').value = data.aboutP3;
+                }
+                if(docName === 'contact') {
+                    if(data.email) document.getElementById('set-email').value = data.email;
+                    if(data.phone) document.getElementById('set-phone').value = data.phone;
+                    if(data.address) document.getElementById('set-address').value = data.address;
+                }
+            }
+        });
+    });
+    
+    // Yükle kategoriler
+    loadCategories();
+}
+
+// Dinamik Site Ayarları Kaydetme
+function saveSettings(docName, elementIds, fieldNames) {
+    const data = {};
+    for (let i = 0; i < elementIds.length; i++) {
+        data[fieldNames[i]] = document.getElementById(elementIds[i]).value;
+    }
+    data.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+    
+    db.collection('settings').doc(docName).set(data, { merge: true }).then(() => {
+        alert("Ayarlar başarıyla kaydedildi! Sitenize hemen yansıyacaktır.");
+    }).catch(e => alert("Hata: " + e.message));
+}
+
+// Kategorileri Yükle
+function loadCategories() {
+    db.collection('settings').doc('categories').get().then(doc => {
+        let cats = {
+            "villa": "Villa / Konut", "apartman": "Apartman", "ev": "Ev / İç Mekan", 
+            "ofis": "Ofis / Ticari", "restoran": "Restoran / Kafe", "otel": "Otel / Konaklama"
+        };
+        if(doc.exists && doc.data().list) {
+            cats = doc.data().list;
+        } else {
+            db.collection('settings').doc('categories').set({list: cats}); // Default kaydet
+        }
+        
+        const sel = document.getElementById('project-type');
+        const listDiv = document.getElementById('category-list');
+        if(sel) sel.innerHTML = '';
+        if(listDiv) listDiv.innerHTML = '';
+        
+        for (const [key, val] of Object.entries(cats)) {
+            if(sel) sel.innerHTML += `<option value="${key}">${val}</option>`;
+            if(listDiv) listDiv.innerHTML += `
+                <div style="display:flex;justify-content:space-between;background:rgba(255,255,255,0.05);padding:10px;border-radius:4px;">
+                    <span>${val} <small style="color:#666">(${key})</small></span>
+                    <button onclick="deleteCategory('${key}')" style="background:#cc0000;border:none;color:white;padding:4px 8px;border-radius:4px;cursor:pointer;">Sil</button>
+                </div>
+            `;
         }
     });
 }
 
-// Site Ayarları Kaydetme
-function saveSettings() {
-    const btn = document.getElementById('save-settings-btn');
-    btn.textContent = "Kaydediliyor...";
+function addCategory() {
+    const id = document.getElementById('new-cat-id').value.trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
+    const name = document.getElementById('new-cat-name').value.trim();
+    if(!id || !name) return alert("Kategori ID ve İsim boş olamaz!");
     
-    db.collection('settings').doc('general').set({
-        heroTitle: document.getElementById('set-hero-title').value,
-        heroDesc: document.getElementById('set-hero-desc').value,
-        email: document.getElementById('set-email').value,
-        phone: document.getElementById('set-phone').value,
-        address: document.getElementById('set-address').value,
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true }).then(() => {
-        btn.textContent = "Tüm Ayarları Kaydet";
-        alert("Ayarlar başarıyla kaydedildi! Sitenize hemen yansıyacaktır.");
-    }).catch(error => {
-        alert("Hata: " + error.message);
-        btn.textContent = "Tüm Ayarları Kaydet";
+    db.collection('settings').doc('categories').get().then(doc => {
+        let cats = doc.exists && doc.data().list ? doc.data().list : {};
+        cats[id] = name;
+        db.collection('settings').doc('categories').set({list: cats}).then(() => {
+            loadCategories();
+            document.getElementById('new-cat-id').value = '';
+            document.getElementById('new-cat-name').value = '';
+        });
+    });
+}
+
+function deleteCategory(id) {
+    if(!confirm("Bu kategoriyi silmek istediğinize emin misiniz? (Önceden bu kategoriyle yüklenen projeler silinmez, sadece listede gözükmez)")) return;
+    db.collection('settings').doc('categories').get().then(doc => {
+        let cats = doc.exists && doc.data().list ? doc.data().list : {};
+        delete cats[id];
+        db.collection('settings').doc('categories').set({list: cats}).then(() => {
+            loadCategories();
+        });
     });
 }
 
