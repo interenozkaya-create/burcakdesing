@@ -6,6 +6,9 @@
   <title>Hizmetler — Burçak Design</title>
   <meta name="description" content="Tasarım, 3D görselleştirme ve uygulama. Projenin başından sonuna kadar bütüncül bir hizmet sunuyoruz."/>
   <link rel="stylesheet" href="styles.css"/>
+  <script src="theme.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
@@ -26,7 +29,7 @@
       <a href="portfolyo.html">Portfolyo</a>
       <a href="iletisim.html">İletişim</a>
     </nav>
-    
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir" style="color:var(--primary);font-size:22px;display:flex;align-items:center;padding:4px;transition:color 0.3s;"></button>
   </div>
 </header>
 
@@ -67,8 +70,8 @@
         <div class="service-detail-content">
           <span class="font-label-caps tag" style="color:var(--primary);letter-spacing:0.3em;">ADIM 01</span>
           <h2 class="font-headline-lg" style="margin-bottom:24px;">Tasarım</h2>
-          <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;">
-            Her proje, müşteriyle birlikte geliştirilen bir konseptle başlar. İhtiyaç analizi ve fikir geliştirme aşamasından teknik çizimlere, malzeme seçiminden ürün tedarikine kadar tasarım sürecinin tüm adımlarını eksiksiz yürütüyoruz. 
+          <p id="serv-1-text" class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;">
+            Her proje, müşteriyle birlikte geliştirilen bir konseptle başlar. İhtiyaç analizi ve fikir geliştirme aşamasından teknik çizimlere, malzeme seçiminden ürün tedarikine kadar tasarım sürecinin tüm adımlarını eksiksiz yürütüyoruz.
           </p>
           <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;margin-top:16px;">
             Hayalinizi net bir projeye dönüştürüyor; inşaat sürecine hazır, uygulanabilir bir tasarım dosyası teslim ediyoruz.
@@ -84,7 +87,7 @@
         <div class="service-detail-content">
           <span class="font-label-caps tag" style="color:var(--primary);letter-spacing:0.3em;">ADIM 02</span>
           <h2 class="font-headline-lg" style="margin-bottom:24px;">3D Görselleştirme</h2>
-          <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;">
+          <p id="serv-2-text" class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;">
             Projenizi inşaat başlamadan önce gerçekçi görseller aracılığıyla deneyimlemenizi sağlıyoruz. İç mekân ve dış cephe görselleştirmesinin yanı sıra 360° sanal tur ve animasyon hizmetleriyle mekânınızı tüm detaylarıyla hissedebilirsiniz.
           </p>
           <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;margin-top:16px;">
@@ -101,8 +104,8 @@
         <div class="service-detail-content">
           <span class="font-label-caps tag" style="color:var(--primary);letter-spacing:0.3em;">ADIM 03</span>
           <h2 class="font-headline-lg" style="margin-bottom:24px;">Uygulama</h2>
-          <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;">
-            Tasarımın hayata geçirilmesi aşamasında 50'yi aşkın kişilik, bünyemizde yer alan deneyimli ve koordineli ekibimizle projenin başından sonuna kesintisiz hizmet sunuyoruz. 
+          <p id="serv-3-text" class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;">
+            Tasarımın hayata geçirilmesi aşamasında 50'yi aşkın kişilik, bünyemizde yer alan deneyimli ve koordineli ekibimizle projenin başından sonuna kesintisiz hizmet sunuyoruz.
           </p>
           <p class="font-body-lg" style="color:var(--on-surface-variant);line-height:1.8;margin-top:16px;">
             Alçıpan ve bölme duvardan zemin kaplamaya, boyadan elektrik-tesisata, mobilyadan dekorasyona kadar tüm imalat ve montaj işleri tek çatı altında, anahtar teslim olarak tamamlanmaktadır.
@@ -169,6 +172,24 @@
 </nav>
 
 <script>
+// Firebase - Hizmetler metinlerini yükle
+const _fbConf = {
+    apiKey: "AIzaSyAtJHm7YPVoz7PsOhL6_HSyk_SURbi6EN8",
+    authDomain: "burcakdesing.firebaseapp.com",
+    projectId: "burcakdesing"
+};
+if (!firebase.apps.length) firebase.initializeApp(_fbConf);
+firebase.firestore().collection('settings').doc('services').get().then(doc => {
+    if (doc.exists) {
+        const d = doc.data();
+        if (d.serv1) document.getElementById('serv-1-text').textContent = d.serv1;
+        if (d.serv2) document.getElementById('serv-2-text').textContent = d.serv2;
+        if (d.serv3) document.getElementById('serv-3-text').textContent = d.serv3;
+    }
+}).catch(() => {});
+</script>
+
+<script>
 // Mobile menu
 document.getElementById('menuOpen').addEventListener('click', () => {
   document.getElementById('mobileNav').classList.add('open');
@@ -189,18 +210,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // Header scroll effect
-window.addEventListener('scroll', () => {
-  const header = document.getElementById('main-header');
-  const current = window.scrollY;
-  
-  if (current > 80) {
-    header.style.background = 'rgba(10,11,13,0.92)';
-    header.style.borderBottomColor = 'rgba(212,168,83,0.12)';
-  } else {
-    header.style.background = 'rgba(10,11,13,0.6)';
-    header.style.borderBottomColor = 'rgba(212,168,83,0.06)';
-  }
-});
+window.addEventListener('scroll', () => { updateHeaderBg(); });
 </script>
 </body>
 </html>

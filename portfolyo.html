@@ -6,6 +6,7 @@
   <title>Tüm Projeler — Burçak Design</title>
   <meta name="description" content="Burçak Design tüm projeleri — villa, apartman, ev, ofis, restoran ve otel iç mimarlık ve 3D render projeleri."/>
   <link rel="stylesheet" href="styles.css"/>
+  <script src="theme.js"></script>
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -211,7 +212,7 @@
       <a href="portfolyo.html" class="active">Portfolyo</a>
       <a href="iletisim.html">İletişim</a>
     </nav>
-    
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir" style="color:var(--primary);font-size:22px;display:flex;align-items:center;padding:4px;transition:color 0.3s;"></button>
   </div>
 </header>
 
@@ -320,10 +321,7 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // Header scroll
-window.addEventListener('scroll', () => {
-  document.getElementById('main-header').style.background =
-    window.scrollY > 100 ? 'rgba(10,10,10,0.95)' : 'rgba(10,10,10,0.85)';
-});
+window.addEventListener('scroll', () => { updateHeaderBg(); });
 
 // ===== FILTER =====
 const pills = document.querySelectorAll('.pill');

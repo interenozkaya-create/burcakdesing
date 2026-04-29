@@ -6,6 +6,7 @@
   <title>İletişim & Teklif Al — Burçak Design</title>
   <meta name="description" content="Hayalinizdeki mekan için ilk adımı atın. Burçak Design ile iletişime geçin ve projeniz için özel teklif alın."/>
   <link rel="stylesheet" href="styles.css"/>
+  <script src="theme.js"></script>
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -29,7 +30,7 @@
       <a href="portfolyo.html">Portfolyo</a>
       <a href="iletisim.html" class="active">İletişim</a>
     </nav>
-    
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir" style="color:var(--primary);font-size:22px;display:flex;align-items:center;padding:4px;transition:color 0.3s;"></button>
   </div>
 </header>
 

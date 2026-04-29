@@ -6,6 +6,7 @@
   <title>Burçak Design — İç Mimarlık & Tasarım</title>
   <meta name="description" content="Burçak Design - Lüks iç mimarlık, 3D modelleme, tasarım ve tadilat hizmetleri. Düşlerinizdeki mekanları tasarlıyoruz."/>
   <link rel="stylesheet" href="styles.css"/>
+  <script src="theme.js"></script>
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -41,7 +42,7 @@
       <a href="portfolyo.html">Portfolyo</a>
       <a href="iletisim.html">İletişim</a>
     </nav>
-    
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir" style="color:var(--primary);font-size:22px;display:flex;align-items:center;padding:4px;transition:color 0.3s;"></button>
   </div>
 </header>
 
@@ -457,13 +458,7 @@ window.addEventListener('scroll', () => {
   const current = window.scrollY;
   
   // Header glass effect
-  if (current > 80) {
-    header.style.background = 'rgba(10,11,13,0.92)';
-    header.style.borderBottomColor = 'rgba(212,168,83,0.12)';
-  } else {
-    header.style.background = 'rgba(10,11,13,0.6)';
-    header.style.borderBottomColor = 'rgba(212,168,83,0.06)';
-  }
+  updateHeaderBg();
   
   // Hero parallax
   if (heroImg && current < window.innerHeight) {
