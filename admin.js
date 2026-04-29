@@ -27,6 +27,7 @@ auth.onAuthStateChanged((user) => {
         loginScreen.style.display = 'none';
         adminPanel.style.display = 'flex';
         loadProjects();
+        loadSettings();
     } else {
         loginScreen.style.display = 'flex';
         adminPanel.style.display = 'none';
@@ -188,4 +189,103 @@ function deleteProject(id, imageUrl) {
             alert("Hata: " + error.message);
         });
     }
+}
+
+// Sekme Değiştirme
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    
+    document.querySelectorAll('.nav-menu li').forEach(li => li.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+}
+
+// Site Ayarları Yükleme
+function loadSettings() {
+    db.collection('settings').doc('general').get().then((doc) => {
+        if (doc.exists) {
+            const data = doc.data();
+            if(data.heroTitle) document.getElementById('set-hero-title').value = data.heroTitle;
+            if(data.heroDesc) document.getElementById('set-hero-desc').value = data.heroDesc;
+            if(data.email) document.getElementById('set-email').value = data.email;
+            if(data.phone) document.getElementById('set-phone').value = data.phone;
+            if(data.address) document.getElementById('set-address').value = data.address;
+        }
+    });
+}
+
+// Site Ayarları Kaydetme
+function saveSettings() {
+    const btn = document.getElementById('save-settings-btn');
+    btn.textContent = "Kaydediliyor...";
+    
+    db.collection('settings').doc('general').set({
+        heroTitle: document.getElementById('set-hero-title').value,
+        heroDesc: document.getElementById('set-hero-desc').value,
+        email: document.getElementById('set-email').value,
+        phone: document.getElementById('set-phone').value,
+        address: document.getElementById('set-address').value,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true }).then(() => {
+        btn.textContent = "Tüm Ayarları Kaydet";
+        alert("Ayarlar başarıyla kaydedildi! Sitenize hemen yansıyacaktır.");
+    }).catch(error => {
+        alert("Hata: " + error.message);
+        btn.textContent = "Tüm Ayarları Kaydet";
+    });
+}
+
+// Eski 28 Projeyi Veritabanına Aktarma
+function importOldProjects() {
+    const oldProjects = [
+        {title: "Obsidian Villa", cat: "villa", img: "images/villa1.png"},
+        {title: "Noir Residence", cat: "villa", img: "images/villa2.png"},
+        {title: "Shadow House", cat: "villa", img: "images/villa3.png"},
+        {title: "Onyx Tower", cat: "apartman", img: "images/apt1.png"},
+        {title: "Slate Residences", cat: "apartman", img: "images/apt2.png"},
+        {title: "Obsidian Penthouse", cat: "ev", img: "images/salon1.png"},
+        {title: "Noir Bedroom Suite", cat: "ev", img: "images/yatak1.png"},
+        {title: "Dark Kitchen", cat: "ev", img: "images/mutfak1.png"},
+        {title: "Spa Bathroom", cat: "ev", img: "images/banyo1.png"},
+        {title: "Executive Office", cat: "ofis", img: "images/ofis1.png"},
+        {title: "The Obsidian Kitchen", cat: "ev", img: "images/project1.png"},
+        {title: "Aura Spa Retreat", cat: "otel", img: "images/project2.png"},
+        {title: "Metropolis Highrise", cat: "apartman", img: "images/apt3.png"},
+        {title: "Lumina Tower", cat: "apartman", img: "images/apt4.png"},
+        {title: "Modern Living Room", cat: "ev", img: "images/ev1.png"},
+        {title: "Minimalist Dining Area", cat: "ev", img: "images/ev2.png"},
+        {title: "Luxury Master Bath", cat: "ev", img: "images/ev3.png"},
+        {title: "Cozy Reading Nook", cat: "ev", img: "images/ev4.png"},
+        {title: "Elegant Home Office", cat: "ev", img: "images/ev5.png"},
+        {title: "Zen Bedroom", cat: "ev", img: "images/ev6.png"},
+        {title: "Creative Studio", cat: "ofis", img: "images/ofis2.png"},
+        {title: "Corporate Boardroom", cat: "ofis", img: "images/ofis3.png"},
+        {title: "Tech Workspace", cat: "ofis", img: "images/ofis4.png"},
+        {title: "Fine Dining Hall", cat: "restoran", img: "images/restoran2.png"},
+        {title: "Cozy Cafe", cat: "restoran", img: "images/restoran3.png"},
+        {title: "Grand Lobby", cat: "otel", img: "images/otel2.png"},
+        {title: "Luxury Suite", cat: "otel", img: "images/otel3.png"},
+        {title: "Rooftop Lounge", cat: "otel", img: "images/otel4.png"}
+    ];
+    
+    const btn = document.getElementById('import-btn');
+    btn.disabled = true;
+    btn.textContent = "Aktarılıyor, lütfen bekleyin...";
+    
+    let count = 0;
+    oldProjects.forEach(proj => {
+        db.collection('projects').add({
+            title: proj.title,
+            category: proj.cat,
+            imageUrl: proj.img,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp() // Sıralamayı korumak biraz zor olabilir ama tarih ile hallederiz
+        }).then(() => {
+            count++;
+            if(count === oldProjects.length) {
+                alert("Tüm 28 proje başarıyla veritabanına aktarıldı!");
+                btn.style.display = 'none';
+                loadProjects();
+            }
+        });
+    });
 }

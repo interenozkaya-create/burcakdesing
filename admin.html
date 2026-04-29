@@ -140,6 +140,13 @@
             border-left-color: var(--primary);
             background: rgba(205, 164, 94, 0.1);
         }
+        
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
         .logout-btn {
             margin-top: auto;
             position: absolute;
@@ -304,18 +311,24 @@
                 <p style="color:#888; font-size: 12px; margin-top:5px;">Admin Panel</p>
             </div>
             <ul class="nav-menu">
-                <li class="active">Portfolyo Yönetimi</li>
+                <li class="active" onclick="switchTab('portfolio')">Portfolyo Yönetimi</li>
+                <li onclick="switchTab('settings')">Site Yazıları</li>
             </ul>
             <button class="logout-btn" onclick="logout()">Çıkış Yap</button>
         </div>
 
         <div class="main-content">
-            <div class="header">
-                <h2>Portfolyo Projeleri</h2>
-                <p>Buradan yeni proje ekleyebilir ve eskileri silebilirsiniz.</p>
-            </div>
+            <!-- PORTFOLIO TAB -->
+            <div id="tab-portfolio" class="tab-content active">
+                <div class="header">
+                    <h2>Portfolyo Projeleri</h2>
+                    <p>Buradan yeni proje ekleyebilir ve eskileri silebilirsiniz.</p>
+                </div>
+                
+                <!-- Geçici Aktarım Butonu -->
+                <button class="btn" style="background:#333; color:white; margin-bottom:20px;" id="import-btn" onclick="importOldProjects()">Eski 28 Projeyi Veritabanına Aktar (Sadece 1 Kere Basın)</button>
 
-            <div class="add-project-form">
+                <div class="add-project-form">
                 <h3 style="margin-top:0;">Yeni Proje Ekle</h3>
                 
                 <div class="upload-area" id="drop-zone">
@@ -348,6 +361,50 @@
                 <!-- Projeler buraya JavaScript ile gelecek -->
                 <p>Projeler yükleniyor...</p>
             </div>
+            </div> <!-- End Portfolio Tab -->
+
+            <!-- SETTINGS TAB -->
+            <div id="tab-settings" class="tab-content">
+                <div class="header">
+                    <h2>Site Yazıları (İçerik Yönetimi)</h2>
+                    <p>Web sitenizdeki başlıkları ve metinleri buradan değiştirebilirsiniz.</p>
+                </div>
+
+                <div class="add-project-form">
+                    <h3 style="margin-top:0; color:var(--primary);">Ana Sayfa Metinleri</h3>
+                    
+                    <div class="form-group">
+                        <label>Büyük Başlık (Örn: Lüksün ve Estetiğin Yeni Tanımı)</label>
+                        <input type="text" id="set-hero-title" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Alt Başlık (Açıklama Metni)</label>
+                        <textarea id="set-hero-desc" class="form-control" rows="3" style="resize:vertical;"></textarea>
+                    </div>
+
+                    <h3 style="margin-top:30px; color:var(--primary);">İletişim Bilgileri</h3>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <label>E-posta Adresi</label>
+                            <input type="text" id="set-email" class="form-control">
+                        </div>
+                        <div class="col">
+                            <label>Telefon Numarası</label>
+                            <input type="text" id="set-phone" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Adres</label>
+                        <input type="text" id="set-address" class="form-control">
+                    </div>
+
+                    <button class="btn" id="save-settings-btn" onclick="saveSettings()">Tüm Ayarları Kaydet</button>
+                </div>
+            </div> <!-- End Settings Tab -->
+
         </div>
     </div>
 
