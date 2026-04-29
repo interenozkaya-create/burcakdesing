@@ -407,6 +407,28 @@
                 </div>
             </div>
 
+            <!-- SETTINGS SERVICES TAB -->
+            <div id="tab-settings_services" class="tab-content">
+                <div class="header">
+                    <h2>Hizmetler Yazıları</h2>
+                </div>
+                <div class="add-project-form">
+                    <div class="form-group">
+                        <label>Tasarım — Açıklama Metni</label>
+                        <textarea id="set-serv-1" class="form-control" rows="5" style="resize:vertical;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>3D Görselleştirme — Açıklama Metni</label>
+                        <textarea id="set-serv-2" class="form-control" rows="5" style="resize:vertical;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Uygulama — Açıklama Metni</label>
+                        <textarea id="set-serv-3" class="form-control" rows="5" style="resize:vertical;"></textarea>
+                    </div>
+                    <button class="btn" onclick="saveSettings('services', ['set-serv-1', 'set-serv-2', 'set-serv-3'], ['serv1', 'serv2', 'serv3'])">Kaydet</button>
+                </div>
+            </div>
+
             <!-- SETTINGS CONTACT TAB -->
             <div id="tab-settings_contact" class="tab-content">
                 <div class="header">
@@ -443,6 +465,6 @@
         </div>
     </div>
 
-    <script src="admin.js?v=2"></script>
+    <script src="admin.js?v=3"></script>
 </body>
 </html>

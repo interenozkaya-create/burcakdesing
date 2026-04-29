@@ -194,41 +194,46 @@ function deleteProject(id, imageUrl) {
 // Sekme Değiştirme
 function switchTab(tabId, element) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-    
+
     const targetTab = document.getElementById('tab-' + tabId);
     if(targetTab) targetTab.classList.add('active');
-    
+
     document.querySelectorAll('.nav-menu li').forEach(li => li.classList.remove('active'));
     if(element) {
         element.classList.add('active');
     }
+
+    document.querySelector('.main-content').scrollTop = 0;
 }
 
 // Site Ayarları Yükleme
 function loadSettings() {
-    ['home', 'about', 'contact'].forEach(docName => {
+    ['home', 'about', 'contact', 'services'].forEach(docName => {
         db.collection('settings').doc(docName).get().then(doc => {
-            if (doc.exists) {
-                const data = doc.data();
-                if(docName === 'home') {
-                    if(data.heroTitle) document.getElementById('set-hero-title').value = data.heroTitle;
-                    if(data.heroDesc) document.getElementById('set-hero-desc').value = data.heroDesc;
-                }
-                if(docName === 'about') {
-                    if(data.aboutP1) document.getElementById('set-about-p1').value = data.aboutP1;
-                    if(data.aboutP2) document.getElementById('set-about-p2').value = data.aboutP2;
-                    if(data.aboutP3) document.getElementById('set-about-p3').value = data.aboutP3;
-                }
-                if(docName === 'contact') {
-                    if(data.email) document.getElementById('set-email').value = data.email;
-                    if(data.phone) document.getElementById('set-phone').value = data.phone;
-                    if(data.address) document.getElementById('set-address').value = data.address;
-                }
+            let data = doc.exists ? doc.data() : {};
+            
+            if(docName === 'home') {
+                document.getElementById('set-hero-title').value = data.heroTitle || "Düşlerinizdeki\nMekanları\nTasarlıyoruz";
+                document.getElementById('set-hero-desc').value = data.heroDesc || "Işık ve gölgenin buluştuğu, malzemenin lüksü tanımladığı\nözel mimari çözümler.";
+            }
+            if(docName === 'about') {
+                document.getElementById('set-about-p1').value = data.aboutP1 || "Ben Eren Özkaya — iç mimarı ve görselleştirme uzmanıyım. Yurt dışında geçirdiğim uzun yıllar boyunca, Kıbrıs başta olmak üzere farklı ülkelerde 60'tan fazla villa projesinde hem tasarım hem de mimari görselleştirme ürettim. Bu deneyim bana farklı kültürlerin mekâna bakış açısını ve farklı beklentileri yakından tanıma fırsatı verdi.";
+                document.getElementById('set-about-p2').value = data.aboutP2 || "Son 7 yıldır Ankara'da; tasarım, 3D görselleştirme ve uygulama olmak üzere projenin başından sonuna kadar bütüncül bir hizmet sunuyorum. Konut projelerinden ticari alanlara, ofislerden konaklama projelerine kadar geniş bir yelpazede çalışıyor, her projeyi kendi dinamiğiyle ele alıyorum.";
+                document.getElementById('set-about-p3').value = data.aboutP3 || "Benim için tasarım, her şeyden önce insanı anlamakla başlar. Kullandığım malzeme, seçtiğim renk, kurduğum mekânsal düzen — bunların hepsi o projeye ve o insana özgü kararların ürünüdür. Çünkü gerçekten iyi bir mekân, fotoğrafta değil; içinde geçirilen günlük hayatta kendini kanıtlar.";
+            }
+            if(docName === 'contact') {
+                document.getElementById('set-email').value = data.email || "info@burcakdesign.com";
+                document.getElementById('set-phone').value = data.phone || "+90 (538) 950 87 58";
+                document.getElementById('set-address').value = data.address || "Çankaya, Ankara\nTürkiye";
+            }
+            if(docName === 'services') {
+                if(data.serv1) document.getElementById('set-serv-1').value = data.serv1;
+                if(data.serv2) document.getElementById('set-serv-2').value = data.serv2;
+                if(data.serv3) document.getElementById('set-serv-3').value = data.serv3;
             }
         });
     });
-    
-    // Yükle kategoriler
+
     loadCategories();
 }
 
@@ -258,7 +263,7 @@ function loadCategories() {
             db.collection('settings').doc('categories').set({list: cats}); // Default kaydet
         }
         
-        const sel = document.getElementById('project-type');
+        const sel = document.getElementById('project-category');
         const listDiv = document.getElementById('category-list');
         if(sel) sel.innerHTML = '';
         if(listDiv) listDiv.innerHTML = '';
