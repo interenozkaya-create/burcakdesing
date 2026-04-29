@@ -295,10 +295,9 @@ if (!sectionId) {
   });
 }
 
-// Dynamic nav
-db.collection('settings').doc('navigation').get({ source: 'server' }).then(doc => {
-  if (!doc.exists || !doc.data().items || !doc.data().items.length) return;
-  const sorted = [...doc.data().items].sort((a,b) => a.order - b.order);
+// Dynamic nav — cache önce, server sonra
+function _applyBolumNav(items) {
+  const sorted = [...items].sort((a,b) => a.order - b.order);
   const currentPage = window.location.pathname.split('/').pop();
 
   const desktopNav = document.getElementById('desktopNav');
@@ -323,6 +322,13 @@ db.collection('settings').doc('navigation').get({ source: 'server' }).then(doc =
       </a>
     `).join('');
   }
+}
+const _cachedNav2 = localStorage.getItem('bd_nav');
+if (_cachedNav2) { try { _applyBolumNav(JSON.parse(_cachedNav2)); } catch(e) {} }
+db.collection('settings').doc('navigation').get({ source: 'server' }).then(doc => {
+  if (!doc.exists || !doc.data().items || !doc.data().items.length) return;
+  _applyBolumNav(doc.data().items);
+  localStorage.setItem('bd_nav', JSON.stringify(doc.data().items));
 });
 </script>
 </body>

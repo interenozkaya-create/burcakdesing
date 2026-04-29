@@ -674,9 +674,13 @@ function updateFilterBar(cats) {
   bar.innerHTML = html;
 }
 
+// Anında göster (cache), sonra güncelle (server)
+const _cachedNav = localStorage.getItem('bd_nav');
+if (_cachedNav) { try { updateNav(JSON.parse(_cachedNav)); } catch(e) {} }
 db.collection('settings').doc('navigation').get({ source: 'server' }).then(doc => {
   if (doc.exists && doc.data().items && doc.data().items.length) {
     updateNav(doc.data().items);
+    localStorage.setItem('bd_nav', JSON.stringify(doc.data().items));
   }
 });
 
