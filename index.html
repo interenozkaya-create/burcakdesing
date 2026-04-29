@@ -289,15 +289,17 @@
         <span class="font-label-caps" style="color:var(--primary);display:block;margin-bottom:20px;letter-spacing:0.35em;">HAKKIMDA</span>
         <h3 class="font-headline-lg" style="margin-bottom:32px;">Eren Özkaya</h3>
         <div style="width:48px;height:2px;background:var(--primary);margin-bottom:40px;"></div>
-        <p class="font-body-lg" style="color:var(--on-surface-variant);margin-bottom:24px;">
-          Ben Eren Özkaya — iç mimarı ve görselleştirme uzmanıyım. Yurt dışında geçirdiğim uzun yıllar boyunca, Kıbrıs başta olmak üzere farklı ülkelerde <strong style="color:var(--on-surface);font-weight:400;">60'tan fazla villa projesinde</strong> hem tasarım hem de mimari görselleştirme ürettim. Bu deneyim bana farklı kültürlerin mekâna bakış açısını ve farklı beklentileri yakından tanıma fırsatı verdi.
-        </p>
-        <p class="font-body-lg" style="color:var(--on-surface-variant);margin-bottom:24px;">
-          Son <strong style="color:var(--on-surface);font-weight:400;">7 yıldır Ankara'da</strong>; tasarım, 3D görselleştirme ve uygulama olmak üzere projenin başından sonuna kadar bütüncül bir hizmet sunuyorum. Konut projelerinden ticari alanlara, ofislerden konaklama projelerine kadar geniş bir yelpazede çalışıyor, her projeyi kendi dinamiğiyle ele alıyorum.
-        </p>
-        <p class="font-body-lg" style="color:var(--on-surface-variant);margin-bottom:40px;">
-          Benim için tasarım, her şeyden önce insanı anlamakla başlar. Kullandığım malzeme, seçtiğim renk, kurduğum mekânsal düzen — bunların hepsi o projeye ve o insana özgü kararların ürünüdür. Çünkü <em style="font-style:italic;color:var(--primary-container);">gerçekten iyi bir mekân, fotoğrafta değil; içinde geçirilen günlük hayatta kendini kanıtlar.</em>
-        </p>
+        <div id="dyn-about-text">
+            <p class="font-body-lg" style="color:var(--on-surface-variant);margin-bottom:24px;">
+            Ben Eren Özkaya — iç mimarı ve görselleştirme uzmanıyım. Yurt dışında geçirdiğim uzun yıllar boyunca, Kıbrıs başta olmak üzere farklı ülkelerde <strong style="color:var(--on-surface);font-weight:400;">60'tan fazla villa projesinde</strong> hem tasarım hem de mimari görselleştirme ürettim. Bu deneyim bana farklı kültürlerin mekâna bakış açısını ve farklı beklentileri yakından tanıma fırsatı verdi.
+            </p>
+            <p class="font-body-lg" style="color:var(--on-surface-variant);margin-bottom:24px;">
+            Son <strong style="color:var(--on-surface);font-weight:400;">7 yıldır Ankara'da</strong>; tasarım, 3D görselleştirme ve uygulama olmak üzere projenin başından sonuna kadar bütüncül bir hizmet sunuyorum. Konut projelerinden ticari alanlara, ofislerden konaklama projelerine kadar geniş bir yelpazede çalışıyor, her projeyi kendi dinamiğiyle ele alıyorum.
+            </p>
+            <p class="font-body-lg" style="color:var(--on-surface-variant);margin-bottom:40px;">
+            Benim için tasarım, her şeyden önce insanı anlamakla başlar. Kullandığım malzeme, seçtiğim renk, kurduğum mekânsal düzen — bunların hepsi o projeye ve o insana özgü kararların ürünüdür. Çünkü <em style="font-style:italic;color:var(--primary-container);">gerçekten iyi bir mekân, fotoğrafta değil; içinde geçirilen günlük hayatta kendini kanıtlar.</em>
+            </p>
+        </div>
         <!-- Mini Stats -->
         <div style="display:flex;gap:48px;flex-wrap:wrap;">
           <div>
@@ -611,7 +613,7 @@ if (!firebase.apps.length) {
 }
 const db = firebase.firestore();
 
-db.collection('settings').doc('general').get().then((doc) => {
+db.collection('settings').doc('home').get().then((doc) => {
     if (doc.exists) {
         const data = doc.data();
         if (data.heroTitle && document.getElementById('dyn-hero-title')) {
@@ -619,6 +621,16 @@ db.collection('settings').doc('general').get().then((doc) => {
         }
         if (data.heroDesc && document.getElementById('dyn-hero-desc')) {
             document.getElementById('dyn-hero-desc').innerHTML = data.heroDesc.replace(/\n/g, '<br/>');
+        }
+    }
+});
+
+db.collection('settings').doc('about').get().then((doc) => {
+    if (doc.exists) {
+        const data = doc.data();
+        if (data.aboutText && document.getElementById('dyn-about-text')) {
+            let paragraphs = data.aboutText.split('\n\n').map(p => `<p class="font-body-lg" style="color:var(--on-surface-variant);margin-bottom:24px;">${p.replace(/\n/g, '<br/>')}</p>`).join('');
+            document.getElementById('dyn-about-text').innerHTML = paragraphs;
         }
     }
 });

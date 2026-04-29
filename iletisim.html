@@ -259,7 +259,7 @@ if (!firebase.apps.length) {
 }
 const db = firebase.firestore();
 
-db.collection('settings').doc('general').get().then((doc) => {
+db.collection('settings').doc('contact').get().then((doc) => {
     if (doc.exists) {
         const data = doc.data();
         if (data.email && document.getElementById('dyn-email')) {
