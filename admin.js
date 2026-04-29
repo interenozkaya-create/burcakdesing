@@ -217,9 +217,7 @@ function loadSettings() {
                 document.getElementById('set-hero-desc').value = data.heroDesc || "Işık ve gölgenin buluştuğu, malzemenin lüksü tanımladığı\nözel mimari çözümler.";
             }
             if(docName === 'about') {
-                document.getElementById('set-about-p1').value = data.aboutP1 || "Ben Eren Özkaya — iç mimarı ve görselleştirme uzmanıyım. Yurt dışında geçirdiğim uzun yıllar boyunca, Kıbrıs başta olmak üzere farklı ülkelerde 60'tan fazla villa projesinde hem tasarım hem de mimari görselleştirme ürettim. Bu deneyim bana farklı kültürlerin mekâna bakış açısını ve farklı beklentileri yakından tanıma fırsatı verdi.";
-                document.getElementById('set-about-p2').value = data.aboutP2 || "Son 7 yıldır Ankara'da; tasarım, 3D görselleştirme ve uygulama olmak üzere projenin başından sonuna kadar bütüncül bir hizmet sunuyorum. Konut projelerinden ticari alanlara, ofislerden konaklama projelerine kadar geniş bir yelpazede çalışıyor, her projeyi kendi dinamiğiyle ele alıyorum.";
-                document.getElementById('set-about-p3').value = data.aboutP3 || "Benim için tasarım, her şeyden önce insanı anlamakla başlar. Kullandığım malzeme, seçtiğim renk, kurduğum mekânsal düzen — bunların hepsi o projeye ve o insana özgü kararların ürünüdür. Çünkü gerçekten iyi bir mekân, fotoğrafta değil; içinde geçirilen günlük hayatta kendini kanıtlar.";
+                document.getElementById('set-about-text').value = data.aboutText || "Ben Eren Özkaya — iç mimarı ve görselleştirme uzmanıyım. Yurt dışında geçirdiğim uzun yıllar boyunca, Kıbrıs başta olmak üzere farklı ülkelerde 60'tan fazla villa projesinde hem tasarım hem de mimari görselleştirme ürettim. Bu deneyim bana farklı kültürlerin mekâna bakış açısını ve farklı beklentileri yakından tanıma fırsatı verdi.\n\nSon 7 yıldır Ankara'da; tasarım, 3D görselleştirme ve uygulama olmak üzere projenin başından sonuna kadar bütüncül bir hizmet sunuyorum. Konut projelerinden ticari alanlara, ofislerden konaklama projelerine kadar geniş bir yelpazede çalışıyor, her projeyi kendi dinamiğiyle ele alıyorum.\n\nBenim için tasarım, her şeyden önce insanı anlamakla başlar. Kullandığım malzeme, seçtiğim renk, kurduğum mekânsal düzen — bunların hepsi o projeye ve o insana özgü kararların ürünüdür. Çünkü gerçekten iyi bir mekân, fotoğrafta değil; içinde geçirilen günlük hayatta kendini kanıtlar.";
             }
             if(docName === 'contact') {
                 document.getElementById('set-email').value = data.email || "info@burcakdesign.com";
@@ -227,9 +225,9 @@ function loadSettings() {
                 document.getElementById('set-address').value = data.address || "Çankaya, Ankara\nTürkiye";
             }
             if(docName === 'services') {
-                if(data.serv1) document.getElementById('set-serv-1').value = data.serv1;
-                if(data.serv2) document.getElementById('set-serv-2').value = data.serv2;
-                if(data.serv3) document.getElementById('set-serv-3').value = data.serv3;
+                document.getElementById('set-serv-1').value = data.serv1 || "Her proje, müşteriyle birlikte geliştirilen bir konseptle başlar. İhtiyaç analizi ve fikir geliştirme aşamasından teknik çizimlere, malzeme seçiminden ürün tedarikine kadar tasarım sürecinin tüm adımlarını eksiksiz yürütüyoruz.";
+                document.getElementById('set-serv-2').value = data.serv2 || "Projenizi inşaat başlamadan önce gerçekçi görseller aracılığıyla deneyimlemenizi sağlıyoruz. İç mekân ve dış cephe görselleştirmesinin yanı sıra 360° sanal tur ve animasyon hizmetleriyle mekânınızı tüm detaylarıyla hissedebilirsiniz.";
+                document.getElementById('set-serv-3').value = data.serv3 || "Tasarımın hayata geçirilmesi aşamasında 50'yi aşkın kişilik, bünyemizde yer alan deneyimli ve koordineli ekibimizle projenin başından sonuna kesintisiz hizmet sunuyoruz.";
             }
         });
     });

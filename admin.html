@@ -375,11 +375,14 @@
                 <div class="add-project-form">
                     <div class="form-group">
                         <label>Büyük Başlık (Örn: Lüksün ve Estetiğin Yeni Tanımı)</label>
-                        <input type="text" id="set-hero-title" class="form-control">
+                        <textarea id="set-hero-title" class="form-control" rows="3">Düşlerinizdeki
+Mekanları
+Tasarlıyoruz</textarea>
                     </div>
                     <div class="form-group">
                         <label>Alt Başlık (Açıklama Metni)</label>
-                        <textarea id="set-hero-desc" class="form-control" rows="3" style="resize:vertical;"></textarea>
+                        <textarea id="set-hero-desc" class="form-control" rows="3" style="resize:vertical;">Işık ve gölgenin buluştuğu, malzemenin lüksü tanımladığı
+özel mimari çözümler.</textarea>
                     </div>
                     <button class="btn" onclick="saveSettings('home', ['set-hero-title', 'set-hero-desc'], ['heroTitle', 'heroDesc'])">Kaydet</button>
                 </div>
@@ -392,18 +395,14 @@
                 </div>
                 <div class="add-project-form">
                     <div class="form-group">
-                        <label>Hakkımda 1. Paragraf</label>
-                        <textarea id="set-about-p1" class="form-control" rows="4"></textarea>
+                        <label>Hakkımda Metni (Tümü)</label>
+                        <textarea id="set-about-text" class="form-control" rows="12">Ben Eren Özkaya — iç mimarı ve görselleştirme uzmanıyım. Yurt dışında geçirdiğim uzun yıllar boyunca, Kıbrıs başta olmak üzere farklı ülkelerde 60'tan fazla villa projesinde hem tasarım hem de mimari görselleştirme ürettim. Bu deneyim bana farklı kültürlerin mekâna bakış açısını ve farklı beklentileri yakından tanıma fırsatı verdi.
+
+Son 7 yıldır Ankara'da; tasarım, 3D görselleştirme ve uygulama olmak üzere projenin başından sonuna kadar bütüncül bir hizmet sunuyorum. Konut projelerinden ticari alanlara, ofislerden konaklama projelerine kadar geniş bir yelpazede çalışıyor, her projeyi kendi dinamiğiyle ele alıyorum.
+
+Benim için tasarım, her şeyden önce insanı anlamakla başlar. Kullandığım malzeme, seçtiğim renk, kurduğum mekânsal düzen — bunların hepsi o projeye ve o insana özgü kararların ürünüdür. Çünkü gerçekten iyi bir mekân, fotoğrafta değil; içinde geçirilen günlük hayatta kendini kanıtlar.</textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Hakkımda 2. Paragraf</label>
-                        <textarea id="set-about-p2" class="form-control" rows="4"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Hakkımda 3. Paragraf</label>
-                        <textarea id="set-about-p3" class="form-control" rows="4"></textarea>
-                    </div>
-                    <button class="btn" onclick="saveSettings('about', ['set-about-p1', 'set-about-p2', 'set-about-p3'], ['aboutP1', 'aboutP2', 'aboutP3'])">Kaydet</button>
+                    <button class="btn" onclick="saveSettings('about', ['set-about-text'], ['aboutText'])">Kaydet</button>
                 </div>
             </div>
 
@@ -415,15 +414,15 @@
                 <div class="add-project-form">
                     <div class="form-group">
                         <label>Tasarım — Açıklama Metni</label>
-                        <textarea id="set-serv-1" class="form-control" rows="5" style="resize:vertical;"></textarea>
+                        <textarea id="set-serv-1" class="form-control" rows="5" style="resize:vertical;">Her proje, müşteriyle birlikte geliştirilen bir konseptle başlar. İhtiyaç analizi ve fikir geliştirme aşamasından teknik çizimlere, malzeme seçiminden ürün tedarikine kadar tasarım sürecinin tüm adımlarını eksiksiz yürütüyoruz.</textarea>
                     </div>
                     <div class="form-group">
                         <label>3D Görselleştirme — Açıklama Metni</label>
-                        <textarea id="set-serv-2" class="form-control" rows="5" style="resize:vertical;"></textarea>
+                        <textarea id="set-serv-2" class="form-control" rows="5" style="resize:vertical;">Projenizi inşaat başlamadan önce gerçekçi görseller aracılığıyla deneyimlemenizi sağlıyoruz. İç mekân ve dış cephe görselleştirmesinin yanı sıra 360° sanal tur ve animasyon hizmetleriyle mekânınızı tüm detaylarıyla hissedebilirsiniz.</textarea>
                     </div>
                     <div class="form-group">
                         <label>Uygulama — Açıklama Metni</label>
-                        <textarea id="set-serv-3" class="form-control" rows="5" style="resize:vertical;"></textarea>
+                        <textarea id="set-serv-3" class="form-control" rows="5" style="resize:vertical;">Tasarımın hayata geçirilmesi aşamasında 50'yi aşkın kişilik, bünyemizde yer alan deneyimli ve koordineli ekibimizle projenin başından sonuna kesintisiz hizmet sunuyoruz.</textarea>
                     </div>
                     <button class="btn" onclick="saveSettings('services', ['set-serv-1', 'set-serv-2', 'set-serv-3'], ['serv1', 'serv2', 'serv3'])">Kaydet</button>
                 </div>
@@ -436,10 +435,14 @@
                 </div>
                 <div class="add-project-form">
                     <div class="row">
-                        <div class="col"><label>E-posta</label><input type="text" id="set-email" class="form-control"></div>
-                        <div class="col"><label>Telefon</label><input type="text" id="set-phone" class="form-control"></div>
+                        <div class="col"><label>E-posta</label><input type="text" id="set-email" class="form-control" value="info@burcakdesign.com"></div>
+                        <div class="col"><label>Telefon</label><input type="text" id="set-phone" class="form-control" value="+90 (538) 950 87 58"></div>
                     </div>
-                    <div class="form-group"><label>Adres</label><input type="text" id="set-address" class="form-control"></div>
+                    <div class="form-group">
+                        <label>Adres</label>
+                        <textarea id="set-address" class="form-control" rows="2">Çankaya, Ankara
+Türkiye</textarea>
+                    </div>
                     <button class="btn" onclick="saveSettings('contact', ['set-email', 'set-phone', 'set-address'], ['email', 'phone', 'address'])">Kaydet</button>
                 </div>
             </div>
@@ -451,12 +454,19 @@
                 </div>
                 <div class="add-project-form">
                     <h3 style="margin-top:0;">Yeni Kategori Ekle</h3>
-                    <div style="display:flex;gap:10px;margin-bottom:30px;">
-                        <input type="text" id="new-cat-id" placeholder="ID (örn: villa)" class="form-control" style="flex:1;">
-                        <input type="text" id="new-cat-name" placeholder="Görünen (örn: Villa / Konut)" class="form-control" style="flex:2;">
-                        <button class="btn" onclick="addCategory()">Ekle</button>
+                    <div class="row" style="margin-bottom:15px;">
+                        <div class="col">
+                            <label>Kısa ID (örn: villa)</label>
+                            <input type="text" id="new-cat-id" placeholder="ID (Boşluksuz küçük harf)" class="form-control">
+                        </div>
+                        <div class="col">
+                            <label>Görünen Ad (örn: Villa / Konut)</label>
+                            <input type="text" id="new-cat-name" placeholder="Menüde görünecek isim" class="form-control">
+                        </div>
                     </div>
-                    <h3 style="margin-top:0;">Mevcut Kategoriler</h3>
+                    <button class="btn" style="margin-bottom: 30px;" onclick="addCategory()">Kategori Ekle</button>
+                    
+                    <h3 style="margin-top:0; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1);">Mevcut Kategoriler</h3>
                     <div id="category-list" style="display:flex;flex-direction:column;gap:10px;">
                         <p>Yükleniyor...</p>
                     </div>
@@ -465,6 +475,6 @@
         </div>
     </div>
 
-    <script src="admin.js?v=3"></script>
+    <script src="admin.js?v=4"></script>
 </body>
 </html>
