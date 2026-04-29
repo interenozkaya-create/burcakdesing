@@ -6,6 +6,9 @@
   <title>İletişim & Teklif Al — Burçak Design</title>
   <meta name="description" content="Hayalinizdeki mekan için ilk adımı atın. Burçak Design ile iletişime geçin ve projeniz için özel teklif alın."/>
   <link rel="stylesheet" href="styles.css"/>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
@@ -78,7 +81,7 @@
             <span class="material-symbols-outlined" style="color:var(--primary);font-size:24px;">location_on</span>
             <div>
               <span class="font-label-caps" style="display:block;color:var(--on-surface-variant);margin-bottom:4px;">Adres</span>
-              <span class="font-body-lg" style="color:var(--on-surface);">Çankaya, Ankara<br/>Türkiye</span>
+              <span class="font-body-lg" id="dyn-address" style="color:var(--on-surface);">Çankaya, Ankara<br/>Türkiye</span>
             </div>
           </div>
           
@@ -86,7 +89,7 @@
             <span class="material-symbols-outlined" style="color:var(--primary);font-size:24px;">mail</span>
             <div>
               <span class="font-label-caps" style="display:block;color:var(--on-surface-variant);margin-bottom:4px;">E-Posta</span>
-              <a href="mailto:info@burcakdesign.com" class="font-body-lg" style="color:var(--on-surface);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface)'">info@burcakdesign.com</a>
+              <a href="mailto:info@burcakdesign.com" id="dyn-email" class="font-body-lg" style="color:var(--on-surface);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface)'">info@burcakdesign.com</a>
             </div>
           </div>
           
@@ -94,7 +97,7 @@
             <span class="material-symbols-outlined" style="color:var(--primary);font-size:24px;">call</span>
             <div>
               <span class="font-label-caps" style="display:block;color:var(--on-surface-variant);margin-bottom:4px;">Telefon / WhatsApp</span>
-              <a href="tel:+905389508758" class="font-body-lg" style="color:var(--on-surface);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface)'">+90 (538) 950 87 58</a>
+              <a href="tel:+905389508758" id="dyn-phone" class="font-body-lg" style="color:var(--on-surface);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface)'">+90 (538) 950 87 58</a>
             </div>
           </div>
         </div>
@@ -237,6 +240,37 @@ window.addEventListener('scroll', () => {
     header.style.background = 'rgba(10,11,13,0.6)';
     header.style.borderBottomColor = 'rgba(212,168,83,0.06)';
   }
+});
+// ===== FIREBASE ENTEGRASYONU (SİTE YAZILARI) =====
+const firebaseConfig = {
+    apiKey: "AIzaSyAtJHm7YPVoz7PsOhL6_HSyk_SURbi6EN8",
+    authDomain: "burcakdesing.firebaseapp.com",
+    projectId: "burcakdesing",
+    storageBucket: "burcakdesing.firebasestorage.app",
+    messagingSenderId: "977185073577",
+    appId: "1:977185073577:web:39ff7a2ebf0fc366113cb8",
+    measurementId: "G-RX6ZBPW3X1"
+};
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+const db = firebase.firestore();
+
+db.collection('settings').doc('general').get().then((doc) => {
+    if (doc.exists) {
+        const data = doc.data();
+        if (data.email && document.getElementById('dyn-email')) {
+            document.getElementById('dyn-email').textContent = data.email;
+            document.getElementById('dyn-email').href = "mailto:" + data.email;
+        }
+        if (data.phone && document.getElementById('dyn-phone')) {
+            document.getElementById('dyn-phone').textContent = data.phone;
+            document.getElementById('dyn-phone').href = "tel:" + data.phone.replace(/\s+/g, '');
+        }
+        if (data.address && document.getElementById('dyn-address')) {
+            document.getElementById('dyn-address').innerHTML = data.address.replace(/\n/g, '<br/>');
+        }
+    }
 });
 </script>
 </body>
