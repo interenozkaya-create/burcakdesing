@@ -192,12 +192,16 @@ function deleteProject(id, imageUrl) {
 }
 
 // Sekme Değiştirme
-function switchTab(e, tabId) {
+function switchTab(tabId, element) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-    document.getElementById('tab-' + tabId).classList.add('active');
-
+    
+    const targetTab = document.getElementById('tab-' + tabId);
+    if(targetTab) targetTab.classList.add('active');
+    
     document.querySelectorAll('.nav-menu li').forEach(li => li.classList.remove('active'));
-    e.currentTarget.classList.add('active');
+    if(element) {
+        element.classList.add('active');
+    }
 }
 
 // Site Ayarları Yükleme
