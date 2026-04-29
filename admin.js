@@ -180,7 +180,7 @@ function loadProjects() {
     });
 }
 
-function deleteProject(id, imageUrl) {
+function deleteProject(id) {
     if(confirm("Bu projeyi silmek istediğinize emin misiniz?")) {
         // Sadece Firestore'dan siliyoruz (Storage'dan silmek isterseniz ek kod gerekir)
         db.collection('projects').doc(id).delete().then(() => {
@@ -461,6 +461,13 @@ function loadCustomSections() {
             `;
         });
     });
+}
+
+function autoFillSectionId(val) {
+    const tr = {'ş':'s','ı':'i','ğ':'g','ü':'u','ö':'o','ç':'c','Ş':'s','İ':'i','Ğ':'g','Ü':'u','Ö':'o','Ç':'c'};
+    const slug = val.split('').map(c => tr[c] || c).join('')
+        .toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+    document.getElementById('new-section-id').value = slug;
 }
 
 function addCustomSection() {
