@@ -233,6 +233,9 @@ function loadSettings() {
     });
 
     loadCategories();
+    loadNavItems();
+    loadCustomSections();
+    setTimeout(initSectionUpload, 100);
 }
 
 // Dinamik Site Ayarları Kaydetme
@@ -358,4 +361,269 @@ function importOldProjects() {
             }
         });
     });
+}
+
+// ===== NAVIGASYON YÖNETİMİ =====
+let navItems = [];
+
+function getDefaultNavItems() {
+    return [
+        {id:'anasayfa', label:'Ana Sayfa', href:'index.html', icon:'home_work', showInBottom:true, order:0},
+        {id:'hakkimda', label:'Hakkımda', href:'#hakkimda', icon:'', showInBottom:false, order:1},
+        {id:'hizmetler', label:'Hizmetler', href:'hizmetler.html', icon:'architecture', showInBottom:true, order:2},
+        {id:'portfolyo', label:'Portfolyo', href:'portfolyo.html', icon:'layers', showInBottom:true, order:3},
+        {id:'iletisim', label:'İletişim', href:'iletisim.html', icon:'mail', showInBottom:true, order:4}
+    ];
+}
+
+function loadNavItems() {
+    db.collection('settings').doc('navigation').get().then(doc => {
+        navItems = (doc.exists && doc.data().items) ? doc.data().items : getDefaultNavItems();
+        if (!doc.exists) {
+            db.collection('settings').doc('navigation').set({items: navItems});
+        }
+        renderNavList();
+    });
+}
+
+function renderNavList() {
+    const listDiv = document.getElementById('nav-list');
+    if (!listDiv) return;
+    if (!navItems.length) {
+        listDiv.innerHTML = '<p style="color:#888;">Menü öğesi yok.</p>';
+        return;
+    }
+    listDiv.innerHTML = [...navItems].sort((a,b) => a.order - b.order).map(item => `
+        <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.05);padding:12px 15px;border-radius:4px;">
+            <div>
+                <span style="font-weight:500;">${item.label}</span>
+                <small style="color:#666;margin-left:10px;">${item.href}</small>
+                ${item.showInBottom ? '<span style="background:rgba(205,164,94,0.2);color:var(--primary);font-size:11px;padding:2px 6px;border-radius:3px;margin-left:8px;">Mobil Alt Bar</span>' : ''}
+            </div>
+            <button onclick="deleteNavItem('${item.id}')" style="background:#cc0000;border:none;color:white;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12px;">Sil</button>
+        </div>
+    `).join('');
+}
+
+function addNavItem() {
+    const label = document.getElementById('new-nav-label').value.trim();
+    const href = document.getElementById('new-nav-href').value.trim();
+    const icon = document.getElementById('new-nav-icon').value.trim();
+    const showInBottom = document.getElementById('new-nav-bottom').checked;
+    if (!label || !href) return alert('Menü adı ve bağlantı boş olamaz!');
+    const id = 'nav_' + Date.now();
+    const maxOrder = navItems.length > 0 ? Math.max(...navItems.map(i => i.order)) + 1 : 5;
+    navItems.push({id, label, href, icon, showInBottom, order: maxOrder});
+    db.collection('settings').doc('navigation').set({items: navItems}).then(() => {
+        renderNavList();
+        document.getElementById('new-nav-label').value = '';
+        document.getElementById('new-nav-href').value = '';
+        document.getElementById('new-nav-icon').value = '';
+        document.getElementById('new-nav-bottom').checked = false;
+        alert('Menü öğesi eklendi! Sayfa yenilendiğinde görünecektir.');
+    });
+}
+
+function deleteNavItem(id) {
+    if (!confirm('Bu menü öğesini silmek istediğinize emin misiniz?')) return;
+    navItems = navItems.filter(item => item.id !== id);
+    db.collection('settings').doc('navigation').set({items: navItems}).then(() => renderNavList());
+}
+
+// ===== ÖZEL BÖLÜMLER YÖNETİMİ =====
+let currentSectionId = null;
+let currentSectionImageUrl = null;
+
+function loadCustomSections() {
+    db.collection('sections').get().then(snapshot => {
+        const listDiv = document.getElementById('sections-list');
+        if (!listDiv) return;
+        if (snapshot.empty) {
+            listDiv.innerHTML = '<p style="color:#888;">Henüz özel bölüm oluşturulmadı. Yukarıdan yeni bölüm ekleyin.</p>';
+            return;
+        }
+        listDiv.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            const itemCount = (data.items || []).length;
+            listDiv.innerHTML += `
+                <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.05);padding:12px 15px;border-radius:4px;">
+                    <div>
+                        <span style="font-weight:500;">${data.title || doc.id}</span>
+                        <small style="color:#888;margin-left:10px;">${itemCount} içerik</small>
+                        <small style="color:#555;margin-left:10px;">URL: bolum.html?id=${doc.id}</small>
+                    </div>
+                    <div style="display:flex;gap:8px;">
+                        <button onclick="openSectionEditor('${doc.id}','${(data.title||'').replace(/'/g,"\\'")}')" style="background:var(--primary);border:none;color:black;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;">İçerik Ekle</button>
+                        <button onclick="deleteCustomSection('${doc.id}')" style="background:#cc0000;border:none;color:white;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12px;">Sil</button>
+                    </div>
+                </div>
+            `;
+        });
+    });
+}
+
+function addCustomSection() {
+    const title = document.getElementById('new-section-title').value.trim();
+    const id = document.getElementById('new-section-id').value.trim()
+        .toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'');
+    if (!title || !id) return alert('Bölüm adı ve ID boş olamaz!');
+    db.collection('sections').doc(id).set({
+        title,
+        items: [],
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        document.getElementById('new-section-title').value = '';
+        document.getElementById('new-section-id').value = '';
+        loadCustomSections();
+        alert(`"${title}" bölümü oluşturuldu!\nURL: bolum.html?id=${id}\n\nBu URL'yi Navigasyon sekmesinden menüye ekleyebilirsiniz.`);
+    }).catch(e => alert('Hata: ' + e.message));
+}
+
+function deleteCustomSection(id) {
+    if (!confirm('Bu bölümü ve tüm içeriğini silmek istediğinize emin misiniz?')) return;
+    db.collection('sections').doc(id).delete().then(() => loadCustomSections());
+}
+
+function openSectionEditor(sectionId, sectionTitle) {
+    currentSectionId = sectionId;
+    currentSectionImageUrl = null;
+    document.getElementById('sections-list-panel').style.display = 'none';
+    document.getElementById('section-editor').style.display = 'block';
+    document.getElementById('section-editor-title').textContent = sectionTitle + ' — İçerik Yönetimi';
+    // Reset upload area
+    document.getElementById('section-upload-text').textContent = 'Görseli buraya sürükleyin veya tıklayın';
+    document.getElementById('section-upload-progress').style.width = '0%';
+    document.getElementById('section-save-image-btn').disabled = true;
+    document.getElementById('section-save-image-btn').textContent = 'Önce Görsel Yükleyin';
+    loadSectionItems(sectionId);
+}
+
+function closeSectionEditor() {
+    currentSectionId = null;
+    currentSectionImageUrl = null;
+    document.getElementById('sections-list-panel').style.display = 'block';
+    document.getElementById('section-editor').style.display = 'none';
+}
+
+function loadSectionItems(sectionId) {
+    db.collection('sections').doc(sectionId).get().then(doc => {
+        const listDiv = document.getElementById('section-items-list');
+        if (!doc.exists) { listDiv.innerHTML = '<p style="color:#888;">Bölüm bulunamadı.</p>'; return; }
+        const items = doc.data().items || [];
+        if (!items.length) {
+            listDiv.innerHTML = '<p style="color:#888;grid-column:1/-1;">Henüz içerik eklenmedi.</p>';
+            return;
+        }
+        listDiv.innerHTML = items.map((item, idx) => {
+            if (item.type === 'image') {
+                return `<div style="background:#1a1a1a;border-radius:8px;overflow:hidden;border:1px solid #333;">
+                    <img src="${item.imageUrl}" style="width:100%;height:160px;object-fit:cover;">
+                    <div style="padding:12px;">
+                        ${item.title ? `<p style="margin:0 0 4px;font-weight:500;font-size:14px;">${item.title}</p>` : ''}
+                        ${item.caption ? `<p style="margin:0;color:#888;font-size:12px;">${item.caption}</p>` : ''}
+                        <button onclick="deleteSectionItem('${sectionId}',${idx})" style="background:#cc0000;border:none;color:white;padding:4px 8px;border-radius:3px;cursor:pointer;font-size:11px;margin-top:8px;">Sil</button>
+                    </div>
+                </div>`;
+            } else {
+                return `<div style="background:#1a1a1a;border-radius:8px;padding:15px;border:1px solid #333;">
+                    ${item.title ? `<p style="margin:0 0 4px;font-weight:500;color:var(--primary);">${item.title}</p>` : ''}
+                    ${item.subtitle ? `<p style="margin:0 0 8px;color:#888;font-size:12px;">${item.subtitle}</p>` : ''}
+                    <p style="margin:0;font-size:13px;color:#ccc;">${item.content || ''}</p>
+                    <button onclick="deleteSectionItem('${sectionId}',${idx})" style="background:#cc0000;border:none;color:white;padding:4px 8px;border-radius:3px;cursor:pointer;font-size:11px;margin-top:10px;">Sil</button>
+                </div>`;
+            }
+        }).join('');
+    });
+}
+
+function saveSectionImageItem() {
+    if (!currentSectionId || !currentSectionImageUrl) return;
+    const title = document.getElementById('section-item-title').value;
+    const caption = document.getElementById('section-item-caption').value;
+    db.collection('sections').doc(currentSectionId).get().then(doc => {
+        const items = doc.exists ? (doc.data().items || []) : [];
+        items.push({type:'image', imageUrl:currentSectionImageUrl, title, caption});
+        return db.collection('sections').doc(currentSectionId).update({items});
+    }).then(() => {
+        currentSectionImageUrl = null;
+        document.getElementById('section-item-title').value = '';
+        document.getElementById('section-item-caption').value = '';
+        document.getElementById('section-upload-text').textContent = 'Görseli buraya sürükleyin veya tıklayın';
+        document.getElementById('section-upload-progress').style.width = '0%';
+        document.getElementById('section-upload-progress').style.backgroundColor = 'var(--primary)';
+        document.getElementById('section-save-image-btn').disabled = true;
+        document.getElementById('section-save-image-btn').textContent = 'Önce Görsel Yükleyin';
+        loadSectionItems(currentSectionId);
+    });
+}
+
+function saveSectionTextItem() {
+    if (!currentSectionId) return;
+    const title = document.getElementById('section-text-title').value.trim();
+    const subtitle = document.getElementById('section-text-subtitle').value.trim();
+    const content = document.getElementById('section-text-content').value.trim();
+    if (!content) return alert('İçerik metni boş olamaz!');
+    db.collection('sections').doc(currentSectionId).get().then(doc => {
+        const items = doc.exists ? (doc.data().items || []) : [];
+        items.push({type:'text', title, subtitle, content});
+        return db.collection('sections').doc(currentSectionId).update({items});
+    }).then(() => {
+        document.getElementById('section-text-title').value = '';
+        document.getElementById('section-text-subtitle').value = '';
+        document.getElementById('section-text-content').value = '';
+        loadSectionItems(currentSectionId);
+    });
+}
+
+function deleteSectionItem(sectionId, index) {
+    if (!confirm('Bu içeriği silmek istediğinize emin misiniz?')) return;
+    db.collection('sections').doc(sectionId).get().then(doc => {
+        const items = doc.exists ? (doc.data().items || []) : [];
+        items.splice(index, 1);
+        return db.collection('sections').doc(sectionId).update({items});
+    }).then(() => loadSectionItems(sectionId));
+}
+
+function initSectionUpload() {
+    const dropZone = document.getElementById('section-drop-zone');
+    const fileInput = document.getElementById('section-file-input');
+    if (!dropZone || !fileInput) return;
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', e => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        if (e.dataTransfer.files.length > 0) uploadSectionImage(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', e => {
+        if (e.target.files.length > 0) uploadSectionImage(e.target.files[0]);
+    });
+}
+
+function uploadSectionImage(file) {
+    if (!file.type.startsWith('image/')) { alert('Lütfen sadece resim dosyası yükleyin.'); return; }
+    const fileName = 'sections/' + Date.now() + '_' + file.name;
+    const uploadTask = storage.ref(fileName).put(file);
+    const uploadText = document.getElementById('section-upload-text');
+    const uploadProgress = document.getElementById('section-upload-progress');
+    const saveBtn = document.getElementById('section-save-image-btn');
+    uploadTask.on('state_changed',
+        snapshot => {
+            const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploadProgress.style.width = pct + '%';
+            uploadText.textContent = 'Yükleniyor... %' + Math.round(pct);
+        },
+        error => alert('Yükleme hatası: ' + error.message),
+        () => {
+            uploadTask.snapshot.ref.getDownloadURL().then(url => {
+                currentSectionImageUrl = url;
+                uploadText.textContent = 'Görsel yüklendi! ✅';
+                uploadProgress.style.backgroundColor = '#4caf50';
+                saveBtn.disabled = false;
+                saveBtn.textContent = 'Görseli Ekle';
+            });
+        }
+    );
 }

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Burçak Design</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <style>
+    .section-item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .section-card {
+      background: var(--surface-container-low);
+      border: 0.5px solid rgba(212,168,83,0.15);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .section-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212,168,83,0.35);
+    }
+    .section-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .section-card-body {
+      padding: 24px;
+    }
+    .section-card-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--on-surface);
+      margin: 0 0 8px;
+      font-weight: 400;
+    }
+    .section-card-caption {
+      color: var(--on-surface-variant);
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .section-text-card {
+      background: var(--surface-container-low);
+      border: 0.5px solid rgba(212,168,83,0.15);
+      border-radius: 8px;
+      padding: 32px;
+      position: relative;
+      transition: border-color 0.3s;
+    }
+    .section-text-card:hover {
+      border-color: rgba(212,168,83,0.35);
+    }
+    .section-text-card::before {
+      content: '"';
+      font-family: var(--font-serif);
+      font-size: 80px;
+      color: var(--primary);
+      opacity: 0.2;
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      line-height: 1;
+    }
+    .section-text-content {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--on-surface-variant);
+      margin: 0 0 16px;
+    }
+    .section-text-author {
+      font-family: var(--font-serif);
+      color: var(--primary);
+      font-size: 16px;
+      margin: 0;
+    }
+    .section-text-sub {
+      color: var(--on-surface-variant);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      margin: 4px 0 0;
+    }
+    .loading-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--on-surface-variant);
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="main-header">
+  <div class="header-inner">
+    <button class="header-menu-btn" id="menuOpen" aria-label="Menü">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <a href="index.html" class="header-logo" style="display:flex;align-items:center;gap:12px;">
+      <img src="images/logo-icon.png" alt="Burçak Design Logo" style="height:36px;width:auto;"/>
+      <span>BURÇAK DESIGN</span>
+    </a>
+    <nav class="header-nav" id="desktopNav">
+      <a href="index.html">Ana Sayfa</a>
+      <a href="hizmetler.html">Hizmetler</a>
+      <a href="portfolyo.html">Portfolyo</a>
+      <a href="iletisim.html">İletişim</a>
+    </nav>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="menuClose">
+    <span class="material-symbols-outlined">close</span>
+  </button>
+  <a href="index.html">Ana Sayfa</a>
+  <a href="hizmetler.html">Hizmetler</a>
+  <a href="portfolyo.html">Portfolyo</a>
+  <a href="iletisim.html">İletişim</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<main style="padding-top:100px;min-height:80vh;">
+  <section class="section-padding">
+    <div class="container">
+      <div id="page-loading" class="loading-state">
+        <p>Yükleniyor...</p>
+      </div>
+
+      <div id="page-content" style="display:none;">
+        <div class="section-header fade-in" style="margin-bottom:16px;">
+          <span class="font-label-caps" style="color:var(--primary);display:block;margin-bottom:16px;letter-spacing:0.35em;" id="page-subtitle">BURÇAK DESIGN</span>
+          <h2 class="font-headline-lg" id="page-title"></h2>
+          <div style="width:48px;height:2px;background:var(--primary);margin-top:24px;"></div>
+        </div>
+
+        <div id="items-container" class="section-item-grid"></div>
+      </div>
+
+      <div id="page-empty" style="display:none;text-align:center;padding:80px 20px;">
+        <p class="font-body-lg" style="color:var(--on-surface-variant);">Bu bölümde henüz içerik bulunmuyor.</p>
+        <a href="index.html" class="btn-ghost" style="margin-top:24px;display:inline-block;">Ana Sayfaya Dön</a>
+      </div>
+
+      <div id="page-error" style="display:none;text-align:center;padding:80px 20px;">
+        <p class="font-body-lg" style="color:var(--on-surface-variant);">Sayfa bulunamadı.</p>
+        <a href="index.html" class="btn-ghost" style="margin-top:24px;display:inline-block;">Ana Sayfaya Dön</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(to right, transparent, var(--primary), transparent);"></div>
+  <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:24px;">
+    <img src="images/logo-icon.png" alt="Burçak Design" style="height:48px;width:auto;"/>
+    <div class="footer-logo" style="font-size:18px;letter-spacing:0.4em;">BURÇAK DESIGN</div>
+    <div style="display:flex;gap:32px;">
+      <a href="hizmetler.html" style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--on-surface-variant);transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface-variant)'">Hizmetler</a>
+      <a href="portfolyo.html" style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--on-surface-variant);transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface-variant)'">Portfolyo</a>
+      <a href="iletisim.html" style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--on-surface-variant);transition:color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--on-surface-variant)'">İletişim</a>
+    </div>
+    <p class="font-body-md" style="font-size:13px;opacity:0.4;">© 2026 Burçak Design. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" id="bottomNav">
+  <a href="index.html">
+    <span class="material-symbols-outlined">home_work</span>
+    <span>Ana Sayfa</span>
+  </a>
+  <a href="hizmetler.html">
+    <span class="material-symbols-outlined">architecture</span>
+    <span>Hizmetler</span>
+  </a>
+  <a href="portfolyo.html">
+    <span class="material-symbols-outlined">layers</span>
+    <span>Portfolyo</span>
+  </a>
+  <a href="iletisim.html">
+    <span class="material-symbols-outlined">mail</span>
+    <span>İletişim</span>
+  </a>
+</nav>
+
+<script>
+// Mobile menu
+document.getElementById('menuOpen').addEventListener('click', () => {
+  document.getElementById('mobileNav').classList.add('open');
+});
+document.getElementById('menuClose').addEventListener('click', () => {
+  document.getElementById('mobileNav').classList.remove('open');
+});
+
+// Header scroll
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('main-header');
+  if (window.scrollY > 80) {
+    header.style.background = 'rgba(10,11,13,0.92)';
+    header.style.borderBottomColor = 'rgba(212,168,83,0.12)';
+  } else {
+    header.style.background = 'rgba(10,11,13,0.6)';
+    header.style.borderBottomColor = 'rgba(212,168,83,0.06)';
+  }
+});
+
+// Scroll animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAtJHm7YPVoz7PsOhL6_HSyk_SURbi6EN8",
+  authDomain: "burcakdesing.firebaseapp.com",
+  projectId: "burcakdesing",
+  storageBucket: "burcakdesing.firebasestorage.app",
+  messagingSenderId: "977185073577",
+  appId: "1:977185073577:web:39ff7a2ebf0fc366113cb8"
+};
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Get section ID from URL
+const urlParams = new URLSearchParams(window.location.search);
+const sectionId = urlParams.get('id');
+
+if (!sectionId) {
+  document.getElementById('page-loading').style.display = 'none';
+  document.getElementById('page-error').style.display = 'block';
+} else {
+  db.collection('sections').doc(sectionId).get().then(doc => {
+    document.getElementById('page-loading').style.display = 'none';
+    if (!doc.exists) {
+      document.getElementById('page-error').style.display = 'block';
+      return;
+    }
+    const data = doc.data();
+    document.title = (data.title || sectionId) + ' — Burçak Design';
+    document.getElementById('page-title').textContent = data.title || sectionId;
+    const items = data.items || [];
+    if (!items.length) {
+      document.getElementById('page-content').style.display = 'block';
+      document.getElementById('page-content').querySelector('h2').parentElement.style.display = 'block';
+      document.getElementById('page-empty').style.display = 'block';
+      return;
+    }
+    document.getElementById('page-content').style.display = 'block';
+    const container = document.getElementById('items-container');
+    // Separate images and texts for different grid layouts
+    const hasImages = items.some(i => i.type === 'image');
+    const hasTexts = items.some(i => i.type === 'text');
+    if (hasTexts && !hasImages) {
+      // All text: 2 column
+      container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(340px, 1fr))';
+    }
+    items.forEach(item => {
+      if (item.type === 'image') {
+        const card = document.createElement('div');
+        card.className = 'section-card fade-in';
+        card.innerHTML = `
+          <img src="${item.imageUrl}" alt="${item.title || ''}" loading="lazy">
+          ${(item.title || item.caption) ? `<div class="section-card-body">
+            ${item.title ? `<h3 class="section-card-title">${item.title}</h3>` : ''}
+            ${item.caption ? `<p class="section-card-caption">${item.caption}</p>` : ''}
+          </div>` : ''}
+        `;
+        container.appendChild(card);
+        observer.observe(card);
+      } else {
+        const card = document.createElement('div');
+        card.className = 'section-text-card fade-in';
+        card.innerHTML = `
+          <p class="section-text-content">${item.content || ''}</p>
+          ${item.title ? `<p class="section-text-author">${item.title}</p>` : ''}
+          ${item.subtitle ? `<p class="section-text-sub">${item.subtitle.toUpperCase()}</p>` : ''}
+        `;
+        container.appendChild(card);
+        observer.observe(card);
+      }
+    });
+  }).catch(() => {
+    document.getElementById('page-loading').style.display = 'none';
+    document.getElementById('page-error').style.display = 'block';
+  });
+}
+
+// Dynamic nav
+db.collection('settings').doc('navigation').get().then(doc => {
+  if (!doc.exists || !doc.data().items || !doc.data().items.length) return;
+  const sorted = [...doc.data().items].sort((a,b) => a.order - b.order);
+  const currentPage = window.location.pathname.split('/').pop();
+
+  const desktopNav = document.getElementById('desktopNav');
+  if (desktopNav) {
+    desktopNav.innerHTML = sorted.map(item => `<a href="${item.href}">${item.label}</a>`).join('');
+  }
+
+  const mobileNav = document.getElementById('mobileNav');
+  if (mobileNav) {
+    mobileNav.innerHTML = `<button class="mobile-nav-close" id="menuClose"><span class="material-symbols-outlined">close</span></button>` +
+      sorted.map(item => `<a href="${item.href}">${item.label}</a>`).join('');
+    document.getElementById('menuClose').addEventListener('click', () => mobileNav.classList.remove('open'));
+  }
+
+  const bottomNav = document.getElementById('bottomNav');
+  if (bottomNav) {
+    const btm = sorted.filter(i => i.showInBottom);
+    bottomNav.innerHTML = btm.map(item => `
+      <a href="${item.href}">
+        ${item.icon ? `<span class="material-symbols-outlined">${item.icon}</span>` : ''}
+        <span>${item.label}</span>
+      </a>
+    `).join('');
+  }
+});
+</script>
+</body>
+</html>
